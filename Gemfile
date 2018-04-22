@@ -5,6 +5,7 @@ ruby '2.5.1'
 
 gem 'rails', '~> 5.2.0'
 gem 'mysql2'
+gem 'devise'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
