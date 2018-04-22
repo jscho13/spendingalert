@@ -6,7 +6,19 @@
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
+  
+  <nav>
+    <% if current_user %>
+      <li class="nav-link"><a href="/users/sign_out" data-method="delete"><button>Log Out</button></a></li>
+    <% else %>
+      <li class="nav-link"><a href="/users/sign_in"><button>Log In</button></a></li>
+      <li class="nav-link"><a href="/users/sign_up"><button id="sign_up">Sign Up</button></a></li>
+    <% end %>
+  </nav>
+  
   <body>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
