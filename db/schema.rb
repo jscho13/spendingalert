@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_22_204806) do
+ActiveRecord::Schema.define(version: 2018_05_15_214238) do
 
   create_table "payola_affiliates", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "code"
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 2018_04_22_204806) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean "active", default: true
+  end
+
+  create_table "payola_products", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.integer "price"
+    t.string "name"
+    t.string "permalink"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "payola_sales", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
