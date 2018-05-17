@@ -1,4 +1,8 @@
 class WelcomeController < ApplicationController
-  def landing
+  def index
+  end
+
+  def dashboard
+		@user = current_user
   end
 end
