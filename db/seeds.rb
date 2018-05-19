@@ -6,4 +6,3 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 #
-PayolaProduct.create(name: 'Subscription', permalink: 'spending-alert-monthly-subscription', price: 299)

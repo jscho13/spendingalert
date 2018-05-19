@@ -1,8 +1,6 @@
 <h3>SpendingAlert App</h3>
 
-
-<%= render 'payola/transactions/checkout',
-      sellable: PayolaProduct.first %>
+<%= render 'payola/subscriptions/checkout', plan: YourSubscriptionPlanClass.first %>
 
 <%= image_tag("budgeting-stress.png") %>
 

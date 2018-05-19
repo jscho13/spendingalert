@@ -6,4 +6,6 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'welcome#dashboard'
   resources :users
+
+	resources :subscriptions
 end
