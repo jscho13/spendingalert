@@ -8,4 +8,8 @@ Rails.application.routes.draw do
   resources :users
 
 	resources :subscriptions
+
+  get 'sample_index', to: 'welcome#sample_index'
+  get 'sample_generic', to: 'welcome#sample_generic'
+  get 'sample_elements', to: 'welcome#sample_elements'
 end

@@ -5,4 +5,13 @@ class WelcomeController < ApplicationController
   def dashboard
 		@user = current_user
   end
+
+  def sample_index
+  end
+
+  def sample_generic
+  end
+
+  def sample_elements
+  end
 end
