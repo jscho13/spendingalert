@@ -1,40 +1,60 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Myapp</title>
+    <title>SpendingAlert</title>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
   </head>
   
-  <nav>
-    <% if current_user %>
-      <li class="nav-link"><a href="/users/sign_out" data-method="delete"><button>Log Out</button></a></li>
-    <% else %>
-      <li class="nav-link"><a href="/users/sign_in"><button>Log In</button></a></li>
-      <li class="nav-link"><a href="/users/sign_up"><button id="sign_up">Sign Up</button></a></li>
-    <% end %>
-
-    <!-- Search -->
-    <section id="search" class="alt">
-      <form method="post" action="#">
-        <input type="text" name="query" id="query" placeholder="Search" />
-      </form>
-    </section>
-
-  </nav>
-  
   <body>
+    <!-- Nav -->
+    <nav>
+      <% if current_user %>
+        <li class="nav-link"><a href="/users/sign_out" data-method="delete"><button>Log Out</button></a></li>
+      <% else %>
+        <li class="nav-link"><a href="/users/sign_in"><button>Log In</button></a></li>
+        <li class="nav-link"><a href="/users/sign_up"><button id="sign_up">Sign Up</button></a></li>
+      <% end %>
+
+      <!-- Search -->
+      <section id="search" class="alt">
+        <form method="post" action="#">
+          <input type="text" name="query" id="query" placeholder="Search" />
+        </form>
+      </section>
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%= render "layouts/flash" %>
 
-    <%= yield %>
-  </body>
+    </nav>
+    <!-- Wrapper -->
+    <div id="wrapper">
+    <div class="inner">
+      <!-- Header -->
+        <header id="header">
+          <a href="index.html" class="logo"><strong>SpendingAlert</strong></a>
+          <ul class="icons">
+            <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="#" class="icon fa-snapchat-ghost"><span class="label">Snapchat</span></a></li>
+            <li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="#" class="icon fa-medium"><span class="label">Medium</span></a></li>
+          </ul>
+        </header>
 
+      <%= yield %>
+
+    </div>
+  </div>
   <!-- Footer -->
-  <footer id="footer">
-    <!-- Section -->
+  <footer>
     <section>
       <header class="major">
         <h2>Get in touch</h2>
@@ -51,5 +71,5 @@
       &copy; Untitled. All rights reserved. Demo Images: <a href="https://unsplash.com">Unsplash</a>. Design: <a href="https://html5up.net">HTML5 UP</a>.
     </p>
   </footer>
-
+  </body>
 </html>

@@ -6,13 +6,20 @@
 
 /* Footer */
 
-	#footer {
-		.copyright {
-			color: _palette(fg-light);
-			font-size: 0.9em;
+footer {
+  background-color: _palette(fg-bold); 
+  color: white;
 
-			a {
-				color: inherit;
-			}
-		}
-	}
+  h2 {
+    color: white;
+  }
+
+  .copyright {
+    color: _palette(fg-light);
+    font-size: 0.9em;
+
+    a {
+      color: inherit;
+    }
+  }
+}
