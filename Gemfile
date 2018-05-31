@@ -7,7 +7,7 @@ gem 'rails', '~> 5.2.0'
 gem 'mysql2'
 gem 'devise'
 gem 'payola-payments', :git => 'git@github.com:payolapayments/payola.git'
-gem 'twilio-ruby', '~> 5.10.1'
+gem 'twilio-ruby'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
