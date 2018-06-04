@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
   get 'dashboard', to: 'welcome#dashboard'
   get 'sample_elements', to: 'welcome#sample_elements'
+  get 'faq', to: 'welcome#faq'
 
   resources :users
-	resources :subscriptions
+  resources :subscriptions
 end

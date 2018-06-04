@@ -8,4 +8,7 @@ class WelcomeController < ApplicationController
 
   def sample_elements
   end
+
+  def faq
+  end
 end
