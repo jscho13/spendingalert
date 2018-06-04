@@ -6,7 +6,7 @@ ruby '2.5.1'
 gem 'rails', '~> 5.2.0'
 gem 'mysql2'
 gem 'devise'
-gem 'payola-payments', :git => 'git@github.com:payolapayments/payola.git'
+gem 'payola-payments', :git=> 'git://github.com/payolapayments/payola.git'
 gem 'twilio-ruby'
 
 # Use Puma as the app server
