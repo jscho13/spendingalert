@@ -19,4 +19,8 @@ class SubscriptionsController < ApplicationController
     # Render the status json that Payola's javascript expects
     render_payola_status(subscription)
   end
+
+  def dashboard
+    @user = current_user
+  end
 end

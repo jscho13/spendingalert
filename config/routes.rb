@@ -4,9 +4,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "welcome#index"
 
-  get 'dashboard', to: 'welcome#dashboard', as: :dashboard
   get 'sample_elements', to: 'welcome#sample_elements'
   get 'faq', to: 'welcome#faq'
+  get 'dashboard', to: 'subscriptions#dashboard', as: :dashboard
+  get 'new', to: 'subscriptions#new'
 
   resources :users
   resources :subscriptions

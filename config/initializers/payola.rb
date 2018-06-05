@@ -27,8 +27,8 @@ Payola.configure do |config|
   end
 
 	# This needs to be populated with something real
-  config.secret_key = 'sk_live_iwillnevertell'
-  config.publishable_key = 'pk_live_iguessicantell'
+  config.secret_key = ENV['STRIPE_DEVELOPMENT_SECRET_KEY']
+  config.publishable_key = ENV['STRIPE_DEVELOPMENT_PUBLISHABLE_KEY']
 
   # config.default_currency = 'gbp'
 
