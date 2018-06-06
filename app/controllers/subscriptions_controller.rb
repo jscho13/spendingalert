@@ -3,6 +3,7 @@ class SubscriptionsController < ApplicationController
   include Payola::StatusBehavior
 
   def new
+    binding.pry
     @plan = SubscriptionPlan.first
   end
 
