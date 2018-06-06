@@ -58,7 +58,7 @@
 			}
 		}
 
-		@include breakpoint(xlarge-to-max) {
+		@include breakpoint(medium-to-max) {
 			article {
 				&:nth-child(3n + 1) {
 					&:before {
@@ -86,7 +86,7 @@
 			}
 		}
 
-		@include breakpoint(xlarge) {
+		@include breakpoint(medium) {
 			article {
 				width: calc(50% - #{$gutter});
 
