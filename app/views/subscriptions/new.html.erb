@@ -1,0 +1,21 @@
+This should be the widget
+<script src="https://atrium.mx.com/connect.js"></script>
+<script>
+  var mxConnect = new MXConnect({
+    id: 'addAccount',
+    url: 'localhost:3000/users/1/connect_widget_url',
+    height: '400px',
+    onLoad: function () {
+      // Add accounts widget successfully loaded
+      console.log('On Load');
+    },
+    onSuccess: function (memberGuid) {
+      // Member created successfully
+      console.log('On Success');
+    }
+  });
+
+  var addAccountClick = function () {
+    mxConnect.load();
+  };
+</script>
