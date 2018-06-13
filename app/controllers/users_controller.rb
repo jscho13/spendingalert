@@ -11,11 +11,21 @@ class UsersController < ApplicationController
     end
   end
 
-  def create
+  def mx_create_user
+    user = ::Atrium::User.create identifier: "#{current_user.id}", is_disabled: "", metadata: "{\"email\": \"#{current_user.email}\"}"
+    render json: user.attributes
   end
 
-  def destroy
+  def mx_list_users
+		users = ::Atrium::User.list
+    render json: users
   end
+
+	def mx_connect_widget
+		@widget = ::Atrium::Connect.create user_guid: "USR-7f83326a-a003-fc1f-ee2a-1415bb6986b0"
+		puts @widget.attributes
+		render "subscriptions/new"
+	end
 
 	private
 

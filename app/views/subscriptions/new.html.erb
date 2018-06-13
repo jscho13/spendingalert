@@ -1,10 +1,10 @@
-This should be the widget
+<div id='addAccount'></div>
+
 <script src="https://atrium.mx.com/connect.js"></script>
 <script>
   var mxConnect = new MXConnect({
     id: 'addAccount',
-    url: 'localhost:3000/users/1/connect_widget_url',
-    height: '400px',
+    url: "<%= @widget.attributes['connect_widget_url'] %>",
     onLoad: function () {
       // Add accounts widget successfully loaded
       console.log('On Load');
@@ -19,3 +19,4 @@ This should be the widget
     mxConnect.load();
   };
 </script>
+

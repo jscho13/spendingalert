@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'subscriptions#dashboard', as: :dashboard
   get 'new', to: 'subscriptions#new'
 
+  # Change later, this is for mx
+  get 'mx_create_user', to: 'users#mx_create_user'
+  get 'mx_list_users', to: 'users#mx_list_users'
+  get 'mx_connect_widget', to: 'users#mx_connect_widget'
+
   resources :users
   resources :subscriptions
 end
