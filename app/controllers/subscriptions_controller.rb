@@ -8,4 +8,7 @@ class SubscriptionsController < ApplicationController
   def dashboard
     @user = current_user
   end
+
+  def stripe
+  end
 end
