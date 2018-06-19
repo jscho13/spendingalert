@@ -8,11 +8,10 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'subscriptions#dashboard', as: :dashboard
   get 'new', to: 'subscriptions#new'
 
+  # this is to get stripe working
   get 'stripe', to: 'subscriptions#stripe'
-  get 'create_product', to: 'subscriptions#create_product'
-  get 'create_plan', to: 'subscriptions#create_plan'
-  get 'create_customer', to: 'subscriptions#create_customer'
-  get 'create_subscription', to: 'subscriptions#create_subscription'
+  post 'charge', to: 'subscriptions#charge'
+  get 'create_product_plan', to: 'subscriptions#create_product_plan'
 
   # Change later, this is for mx
   get 'mx_create_user', to: 'users#mx_create_user'
