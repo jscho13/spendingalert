@@ -1,7 +1,11 @@
 class SubscriptionsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
-  def new
+  def budgeting
+    @user = current_user
+  end
+
+  def payment
   end
 
   def charge
@@ -18,27 +22,6 @@ class SubscriptionsController < ApplicationController
 		render json: subscription
   end
 
-  def dashboard
-    @user = current_user
-  end
-
-  def stripe
-  end
-
-  def create_product_plan
-		product = Stripe::Product.create({
-			name: 'Spending Alert Subscription',
-			type: 'service',
-		})
-
-		plan = Stripe::Plan.create({
-			product: product["id"],
-			nickname: 'Spending Alert Monthly Subscription',
-			interval: 'month',
-			currency: 'usd',
-			amount: 299,
-		})
-
-    render json: plan
+  def new
   end
 end
