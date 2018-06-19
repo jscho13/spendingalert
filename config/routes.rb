@@ -9,9 +9,10 @@ Rails.application.routes.draw do
   get 'new', to: 'subscriptions#new'
 
   get 'stripe', to: 'subscriptions#stripe'
-  post 'charge', to: 'subscriptions#charge'
   get 'create_product', to: 'subscriptions#create_product'
   get 'create_plan', to: 'subscriptions#create_plan'
+  get 'create_customer', to: 'subscriptions#create_customer'
+  get 'create_subscription', to: 'subscriptions#create_subscription'
 
   # Change later, this is for mx
   get 'mx_create_user', to: 'users#mx_create_user'
