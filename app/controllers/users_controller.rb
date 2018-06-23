@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 	def mx_connect_widget
 		@widget = ::Atrium::Connect.create user_guid: "USR-7f83326a-a003-fc1f-ee2a-1415bb6986b0"
 		puts @widget.attributes
-		render "subscriptions/new"
+		render "subscriptions/new", layout: false
 	end
 
 	private
