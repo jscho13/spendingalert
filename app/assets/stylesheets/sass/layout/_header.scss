@@ -47,6 +47,10 @@ header {
     color: inherit;
     font-family: _font(family-heading);
     font-size: 1.125em;
+
+    img {
+      width: 100%;
+    }
   }
 
   .icons {
