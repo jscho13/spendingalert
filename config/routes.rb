@@ -1,21 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :users
+  resources :subscriptions
   root to: "welcome#index"
 
+  # Welcome Routes
   get 'sample_elements', to: 'welcome#sample_elements'
   get 'faq', to: 'welcome#faq'
 
-  get 'budgeting', to: 'subscriptions#budgeting', as: :budgeting
+  # Subscription Routes
+  get 'accounts', to: 'subscriptions#accounts', as: :accounts
+  get 'budget', to: 'subscriptions#budget', as: :budget
+  get 'dashboard', to: 'subscriptions#dashboard', as: :dashboard
   get 'payment', to: 'subscriptions#payment'
   post 'charge', to: 'subscriptions#charge'
-
-  # probably will be deleted
-  get 'mx_create_user', to: 'users#mx_create_user'
-  get 'mx_list_users', to: 'users#mx_list_users'
-  get 'mx_connect_widget', to: 'users#mx_connect_widget'
-
-  resources :users
-  resources :subscriptions
 end

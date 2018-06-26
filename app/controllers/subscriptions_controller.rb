@@ -1,11 +1,14 @@
 class SubscriptionsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  def accounts
+    get_connect_widget
+  end
 
-  def budgeting 
+  def budget 
     @user = current_user
+    @user.has_guid? #TODO: move this into Devise controller to run once
+  end
 
-    #TODO: move this into Devise controller to run once
-    @user.has_guid?
+  def dashboard
   end
 
   def payment
@@ -25,9 +28,9 @@ class SubscriptionsController < ApplicationController
 		render json: subscription
   end
 
-	def mx_connect_widget
+  private
+
+	def get_connect_widget
 		@widget = ::Atrium::Connect.create user_guid: "#{current_user.guid}"
-		puts @widget.attributes
-		render "subscriptions/new", layout: false
 	end
 end

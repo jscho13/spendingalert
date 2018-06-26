@@ -23,7 +23,10 @@ class User < ApplicationRecord
       users = ::Atrium::User.list
       users.each do |user|
         if self.id = user.identifier
-          self.update_attribute(:guid, user.guid)
+        binding.pry
+          u = User.find(self.id)
+          u.guid = user.guid
+          u.save
         end
       end
       logger.debug "Updated User #{self.id} with guid #{self.guid}"
