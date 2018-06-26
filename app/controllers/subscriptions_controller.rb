@@ -1,6 +1,7 @@
 class SubscriptionsController < ApplicationController
   def accounts
     get_connect_widget
+    get_memberships
   end
 
   def budget 
@@ -9,28 +10,42 @@ class SubscriptionsController < ApplicationController
   end
 
   def dashboard
+    @user = current_user
+    @user.members = get_all_memberships
+
+    transactions = get_all_transactions
+    @user.total_spending = transactions.sum(&:amount)
   end
 
   def payment
   end
 
   def charge
-		customer = Stripe::Customer.create({
-			email: 'jscho13@gmail.com',
-			source: params[:stripeToken],
-		})
+    customer = Stripe::Customer.create({
+      email: 'jscho13@gmail.com',
+      source: params[:stripeToken],
+    })
 
-		subscription = Stripe::Subscription.create({
-			customer: customer["id"],
-			items: [{plan: 'plan_D52dfQ7ohJSpzR'}],
-		})
+    subscription = Stripe::Subscription.create({
+      customer: customer["id"],
+      items: [{plan: 'plan_D52dfQ7ohJSpzR'}],
+    })
 
-		render json: subscription
+    render json: subscription
   end
 
   private
 
-	def get_connect_widget
-		@widget = ::Atrium::Connect.create user_guid: "#{current_user.guid}"
-	end
+  def get_connect_widget
+    @widget = ::Atrium::Connect.create user_guid: "#{current_user.guid}"
+  end
+
+  def get_all_memberships
+    ::Atrium::Member.list user_guid: "#{current_user.guid}"
+  end
+
+  def get_all_transactions
+    params = { user_guid: current_user.guid }
+    ::Atrium::Transaction.list params
+  end
 end

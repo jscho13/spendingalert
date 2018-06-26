@@ -1,8 +1,8 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  attr_accessor :total_spending, :members
 
   def has_guid?
     if self.guid.nil?
@@ -23,7 +23,6 @@ class User < ApplicationRecord
       users = ::Atrium::User.list
       users.each do |user|
         if self.id = user.identifier
-        binding.pry
           u = User.find(self.id)
           u.guid = user.guid
           u.save
