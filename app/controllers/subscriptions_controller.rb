@@ -1,7 +1,6 @@
 class SubscriptionsController < ApplicationController
   def accounts
     get_connect_widget
-    get_memberships
   end
 
   def budget 

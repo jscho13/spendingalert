@@ -1,11 +1,12 @@
-<div style="min-width: 350px;">
-  <h2>Set Budget Limit</h2>
+<div class="box-container">
+  <div class="box">
+    <h2>Set Budget Limit</h2>
 
-  <%= form_for(@user) do |f| %>
-  <%= f.label :user_budget, "Budget Limit" %><br/>
-  <%= f.number_field :user_budget %><br/>
+    <%= form_for(@user) do |f| %>
+    <%= f.label :user_budget, "Budget Limit" %><br/>
+    <%= f.number_field :user_budget %><br/>
 
-  <%= f.submit "Set Budget" %>
-  <% end %>
+    <%= f.submit "Set Budget" %>
+    <% end %>
+  </div>
 </div>
-
