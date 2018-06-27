@@ -11,7 +11,10 @@
 		border: solid 1px _palette(border);
 //     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 		margin-bottom: _size(element-margin);
+    min-width: 342px;
 		padding: 10px;
+    width: 70%;
+    text-align: center;
 
 		> :last-child,
 		> :last-child > :last-child,
@@ -27,7 +30,6 @@
 	}
 
   .box-container {
-    align-items: center;
     display: flex;
     justify-content: center;
     padding-top: 5%;

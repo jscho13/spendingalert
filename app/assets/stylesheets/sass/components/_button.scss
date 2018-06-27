@@ -85,3 +85,13 @@
 			opacity: 0.25;
 		}
 	}
+
+  #budget-field {
+    margin-bottom: 15px;
+    border: 0;
+    border-bottom: 1px _palette(accent) solid ;
+
+    &:focus {
+      outline: none;
+    }
+  }

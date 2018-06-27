@@ -17,9 +17,3 @@
 @import 'sass/font-awesome.min.css';
 // @import 'sass/ie8.css';
 // @import 'sass/ie9.css';
-
-#addAccount {
-  // MxConnect needs 320px min
-  // (10px padding + 1px border)*2 = +22
-  min-width: 342px;
-}
