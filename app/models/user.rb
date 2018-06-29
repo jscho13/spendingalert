@@ -20,14 +20,14 @@ class User < ApplicationRecord
   def create_mx_user
     begin
       user = ::Atrium::User.create identifier: "#{self.id}", is_disabled: "", metadata: "{\"email\": \"#{self.email}\"}"
-      update_attribute(:guid, user.guid)
+      binding.pry
+      self.update_attribute(:guid, user.guid)
     rescue
       users = ::Atrium::User.list
       users.each do |user|
-        if self.id = user.identifier
+        if self.id == user.identifier.to_i
           u = User.find(self.id)
-          u.guid = user.guid
-          u.save
+          u.update_attribute(:guid, user.guid)
         end
       end
       logger.debug "Updated User #{self.id} with guid #{self.guid}"

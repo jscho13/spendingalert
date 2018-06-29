@@ -3,16 +3,19 @@
     <h3>Current Accounts</h3>
     <ul>
       <% @user.members.each do |name| %>
-        <li><%= name.name %></ul>
+        <li class="dashboard__member"><%= name.name %></ul>
       <% end %>
     </ul>
 
     <h3>Current Budget</h3>
-    <p><%= @user.user_budget %></p>
+    <p><%= number_to_currency(@user.user_budget, precision: 2) %></p>
 
     <h3>Total Spending for the Month</h3>
-    <p><%= @user.total_spending %></p>
+    <p><%= number_to_currency(@user.total_spending, precision: 2) %></p>
   </div>
 </div>
 
-<%= @user.to_json %>
+
+<div class="box-container">
+  <a class="button" onClick="sampleText">Send Sample Text</a>
+</div>

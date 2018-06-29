@@ -1,13 +1,12 @@
 class UsersController < ApplicationController
   def update
-		@user = current_user
-    @user.update(user_params)
-    if @user.save
+    @user = current_user
+    if @user.update_attributes(user_params)
       flash.notice = "Budget saved successfully"
-      render dashboard_path
+      redirect_to dashboard_path
     else
       flash.notice = @user.errors.full_messages.join(". ")
-      render dashboard_path
+      redirect_to dashboard_path
     end
   end
 

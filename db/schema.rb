@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_29_002039) do
+ActiveRecord::Schema.define(version: 2018_06_29_170911) do
 
   create_table "subscription_plans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "amount"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2018_06_29_002039) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_budget"
-    t.integer "phone_number", null: false
+    t.bigint "phone_number", null: false
     t.string "guid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -5,11 +5,11 @@ class SubscriptionsController < ApplicationController
 
   def budget 
     @user = current_user
-    @user.has_guid? #TODO: move this into Devise controller to run once
   end
 
   def dashboard
     @user = current_user
+    @user.has_guid? #TODO: move this into Devise controller to run once
     @user.members = get_all_memberships
 
     transactions = get_all_transactions
