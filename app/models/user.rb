@@ -2,6 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :phone_number, phone: true
+
   attr_accessor :total_spending, :members
 
   def has_guid?

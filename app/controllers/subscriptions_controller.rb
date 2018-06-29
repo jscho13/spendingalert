@@ -16,22 +16,29 @@ class SubscriptionsController < ApplicationController
     @user.total_spending = transactions.sum(&:amount)
   end
 
-  def payment
+  def send_message
+    @user = current_user
+    message = "Heads up you've hit your limit of $'#{@user.user_budget}' for this month."
+    TwilioTextMessenger.new(message).call
+    render dashboard_path
   end
 
-  def charge
-    customer = Stripe::Customer.create({
-      email: 'jscho13@gmail.com',
-      source: params[:stripeToken],
-    })
-
-    subscription = Stripe::Subscription.create({
-      customer: customer["id"],
-      items: [{plan: 'plan_D52dfQ7ohJSpzR'}],
-    })
-
-    render json: subscription
-  end
+#   def payment
+#   end
+# 
+#   def charge
+#     customer = Stripe::Customer.create({
+#       email: 'jscho13@gmail.com',
+#       source: params[:stripeToken],
+#     })
+# 
+#     subscription = Stripe::Subscription.create({
+#       customer: customer["id"],
+#       items: [{plan: 'plan_D52dfQ7ohJSpzR'}],
+#     })
+# 
+#     render json: subscription
+#   end
 
   private
 
