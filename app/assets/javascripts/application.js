@@ -15,3 +15,19 @@
 //= require turbolinks
 //= require_tree .
 
+$(document).ready(function() {
+  console.log("Put listeners in here");
+});
+
+function sendMessage() {
+  $.get( "send_message", function( data ) {
+    console.log( "Texting!" );
+  })
+    .done(function() {
+      console.log( "Message successfully sent." );
+    })
+    .fail(function() {
+      console.log( "Sorry there was an error, please try again." );
+    });
+}
+

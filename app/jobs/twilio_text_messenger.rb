@@ -5,11 +5,11 @@ class TwilioTextMessenger
     @message = message
   end
 
-  def call
+  def call(phone_number)
     client = Twilio::REST::Client.new
     client.messages.create({
       from: ENV['TWILIO_PHONE_NUMBER'],
-      to: 'YOUR PERSONAL PHONE NUMBER GOES HERE',
+      to: "#{phone_number}",
       body: message
     })
   end

@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'subscriptions#dashboard', as: 'dashboard'
   get 'payment', to: 'subscriptions#payment'
   post 'charge', to: 'subscriptions#charge'
+
+  get 'send_message', to: 'subscriptions#send_message', as: 'send_message'
 end
