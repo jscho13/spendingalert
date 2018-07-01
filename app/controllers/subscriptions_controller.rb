@@ -18,7 +18,10 @@ class SubscriptionsController < ApplicationController
 
   def send_message
     @user = current_user
-    message = "Heads up you've hit your limit of $'#{@user.user_budget}' for this month."
+    message = "SpendingAlert:\n
+              $#{@user.user_budget} Spending Limit\n
+              $#{@user.current_spending} Spent so far\n
+              $#{@user.user_budget-@user.current_spending} left to spend or save!"
     TwilioTextMessenger.new(message).call(@user.phone_number)
   end
 

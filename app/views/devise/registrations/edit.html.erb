@@ -9,7 +9,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :phone_number %>
+    <%= f.label :phone_number %> <i>(Cell Phone Required)</i>
+
     <%= f.telephone_field :phone_number, autocomplete: "tel", placeholder: '(xxx) xxx-xxxx' %>
   </div>
 
