@@ -1,13 +1,13 @@
 <div class="box-container">
   <div class="box">
-    <h3>Current Accounts</h3>
+    <h3><a href="/accounts">Current Accounts</a></h3>
     <ul>
       <% @user.members.each do |name| %>
         <li class="dashboard__member"><%= name.name %></ul>
       <% end %>
     </ul>
 
-    <h3>Current Budget</h3>
+    <h3><a href="/budget">Current Budget</a></h3>
     <p><%= number_to_currency(@user.user_budget, precision: 2) %></p>
 
     <h3>Total Spending for the Month</h3>
