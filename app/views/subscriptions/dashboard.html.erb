@@ -1,17 +1,31 @@
 <div class="box-container">
   <div class="box">
-    <h3><a href="/accounts">Current Accounts</a></h3>
+    <h3>Current Accounts</h3>
     <ul>
       <% @user.members.each do |name| %>
         <li class="dashboard__member"><%= name.name %></ul>
       <% end %>
     </ul>
+    <h5><a href="/accounts">Add Accounts</a></h5>
 
-    <h3><a href="/budget">Current Budget</a></h3>
+    <h3>Current Budget</h3>
     <p><%= number_to_currency(@user.user_budget, precision: 2) %></p>
+    <h5><a href="/budget">Edit Budget</a></h5>
 
     <h3>Total Spending for the Month</h3>
     <p><%= number_to_currency(@user.total_spending, precision: 2) %></p>
+
+    <h3>Alert Schedule</h3>
+    <select>
+      <option value="interval5days">Every 5 Days</option>
+      <option value="intervalWeekly">Weekly</option>
+      <option value="intervalPercent">% of Spending</option>
+      <option value="intervalLimit">Only When I Hit My Budget</option>
+    </select>
+    <select>
+      <option value="email">Email (free)</option>
+      <option value="text">Text</option>
+    </select>
   </div>
 </div>
 
