@@ -6,7 +6,7 @@
         <li class="dashboard__member"><%= name.name %></ul>
       <% end %>
     </ul>
-    <h5><a href="/accounts">Add Accounts</a></h5>
+    <h5><a href="/accounts">Connect More Accounts</a></h5>
 
     <h3>Current Budget</h3>
     <p><%= number_to_currency(@user.user_budget, precision: 2) %></p>
@@ -16,15 +16,17 @@
     <p><%= number_to_currency(@user.total_spending, precision: 2) %></p>
 
     <h3>Alert Schedule</h3>
-    <select>
-      <option value="interval5days">Every 5 Days</option>
-      <option value="intervalWeekly">Weekly</option>
+    <select id="notificationInterval">
+      <option value="interval5days">Every 5 Days (5th, 10th, 15th, Last Day of Month)</option>
+      <option value="intervalWeekly">Weekly (7th, 14th, 21st, Last Day of Month)</option>
       <option value="intervalPercent">% of Spending</option>
       <option value="intervalLimit">Only When I Hit My Budget</option>
     </select>
-    <select>
+
+    <select id="notificationType">
       <option value="email">Email (free)</option>
       <option value="text">Text</option>
+      <option value="emailText">Text and Email</option>
     </select>
   </div>
 </div>

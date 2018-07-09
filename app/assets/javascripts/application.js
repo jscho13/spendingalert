@@ -16,7 +16,21 @@
 //= require_tree .
 
 $(document).ready(function() {
-  console.log("Put listeners in here");
+  $("select#notificationInterval").on("change", function() {
+    $.ajax({
+      url:  "/filter_units_by_organization",
+      type: "GET",
+      data: { selected_organization: $("select#project_organization_id").val() }
+    });
+  });
+
+  $("select#notificationType").on("change", function() {
+    $.ajax({
+      url:  "/filter_units_by_organization",
+      type: "GET",
+      data: { selected_organization: $("select#project_organization_id").val() }
+    });
+  });
 });
 
 function sendMessage() {
