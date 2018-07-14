@@ -5,12 +5,15 @@
 ///
 
 /* Box */
+  .box-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 5%;
+  }
 
 	.box {
 		border-radius: _size(border-radius);
 		border: solid 1px _palette(border);
-//     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-		margin-bottom: _size(element-margin);
     min-width: 342px;
 		padding: 10px;
     width: 70%;
@@ -28,9 +31,3 @@
 			padding: 0;
 		}
 	}
-
-  .box-container {
-    display: flex;
-    justify-content: center;
-    padding-top: 5%;
-  }

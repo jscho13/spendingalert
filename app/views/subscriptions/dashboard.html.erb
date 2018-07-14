@@ -7,14 +7,20 @@
       <% end %>
     </ul>
     <h5><a href="/accounts">Connect More Accounts</a></h5>
+  </div>
 
+  <div class="box">
     <h3>Current Budget</h3>
     <p><%= number_to_currency(@user.user_budget, precision: 2) %></p>
     <h5><a href="/budget">Edit Budget</a></h5>
+  </div>
 
+  <div class="box">
     <h3>Total Spending for the Month</h3>
     <p><%= number_to_currency(@user.total_spending, precision: 2) %></p>
+  </div>
 
+  <div class="box">
     <h3>Alert Schedule</h3>
     <select id="notificationInterval">
       <option value="interval5days">Every 5 Days (5th, 10th, 15th, Last Day of Month)</option>
@@ -29,8 +35,6 @@
       <option value="emailText">Text and Email</option>
     </select>
   </div>
-</div>
 
-<div class="box-container">
   <a class="button" onclick="sendMessage()">Send Alert</a>
 </div>
