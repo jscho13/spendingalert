@@ -25,6 +25,13 @@ class SubscriptionsController < ApplicationController
     TwilioTextMessenger.new(message).call(@user.phone_number)
   end
 
+  def send_messages
+    users_to_be_notified = get_unnotified_users
+    users_to_be_notified.each do |u|
+      user = User.find(u.id)
+      user.send_message
+    end
+  end
 #   def payment
 #   end
 # 

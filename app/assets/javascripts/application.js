@@ -34,7 +34,7 @@ $(document).ready(function() {
 });
 
 function sendMessage() {
-  $.get( "send_message", function( data ) {
+  $.get( "/subscription/send_messages", function( data ) {
     console.log( "Texting!" );
   })
     .done(function() {

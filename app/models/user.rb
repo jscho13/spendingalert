@@ -6,6 +6,14 @@ class User < ApplicationRecord
 
   attr_accessor :total_spending, :members
 
+  def send_message
+    message = "SpendingAlert:\n
+              $#{self.user_budget} Spending Limit\n
+              $#{self.current_spending} Spent so far\n
+              $#{self.user_budget-self.current_spending} left to spend or save!"
+    TwilioTextMessenger.new(message).call(self.phone_number)
+  end
+
   def has_guid?
     if self.guid.nil?
       create_mx_user

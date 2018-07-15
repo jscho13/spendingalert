@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   get 'budget', to: 'subscriptions#budget', as: 'budget'
   get 'dashboard', to: 'subscriptions#dashboard', as: 'dashboard'
   get 'payment', to: 'subscriptions#payment'
+
   post 'charge', to: 'subscriptions#charge'
 
-  get 'send_message', to: 'subscriptions#send_message', as: 'send_message'
+  get '/subscriptions/send_message', to: 'subscriptions#send_message', as: 'send_message'
+  get '/subscriptions/send_messages', to: 'subscriptions#send_messages', as: 'send_messages'
 end

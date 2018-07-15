@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_09_022947) do
+ActiveRecord::Schema.define(version: 2018_07_15_224223) do
 
   create_table "subscription_plans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "amount"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 2018_07_09_022947) do
     t.string "guid"
     t.string "notificationInterval"
     t.string "notificationType"
+    t.boolean "alertSentFlag", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
