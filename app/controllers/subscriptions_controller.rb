@@ -60,7 +60,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def get_all_transactions
-    params = { user_guid: current_user.guid, from_date: (Date.today-90).to_s }
+    params = { user_guid: current_user.guid, from_date: (Date.today.at_beginning_of_month).to_s }
     ::Atrium::Transaction.list params
   end
 end
