@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update_attributes(user_params)
-      flash.notice = "Budget saved successfully"
+      flash.notice = "Got it. We've updated your preferences."
       redirect_to dashboard_path
     else
       flash.notice = @user.errors.full_messages.join(". ")
@@ -14,7 +14,10 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(
-      :user_budget
+      :user_budget,
+      :notificationInterval,
+      :notificationType,
+      :notificationPercent
     )
   end
 end

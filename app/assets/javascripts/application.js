@@ -16,20 +16,10 @@
 //= require_tree .
 
 $(document).ready(function() {
-  $("select#notificationInterval").on("change", function() {
-    $.ajax({
-      url:  "/filter_units_by_organization",
-      type: "GET",
-      data: { selected_organization: $("select#project_organization_id").val() }
-    });
-  });
+  checkNotificationInterval();
 
-  $("select#notificationType").on("change", function() {
-    $.ajax({
-      url:  "/filter_units_by_organization",
-      type: "GET",
-      data: { selected_organization: $("select#project_organization_id").val() }
-    });
+  $("select#notification_interval").on("change", function() {
+    checkNotificationInterval();
   });
 });
 
@@ -45,3 +35,10 @@ function sendMessage() {
     });
 }
 
+function checkNotificationInterval() {
+  if ($("select#notification_interval").val() == "interval_percent") {
+    $("#notification_percent").show();
+  } else {
+    $("#notification_percent").hide();
+  }
+}

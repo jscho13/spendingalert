@@ -32,6 +32,7 @@ class SubscriptionsController < ApplicationController
       user.send_message
     end
   end
+
 #   def payment
 #   end
 # 
@@ -50,6 +51,55 @@ class SubscriptionsController < ApplicationController
 #   end
 
   private
+
+  def get_unnotified_users
+    members = get_all_memberships
+    members.each do |m|
+      if m.notificationDate?(m) 
+        m.notify_user
+      end
+    end
+  end
+
+  def notificationDate?(member)
+    case user.notificationInterval
+    when "interval_5_days"
+      check_interval_5_days
+    when "interval_weekly"
+      check_interval_weekly
+    when "interval_percent"
+      check_interval_value(member, "notification_percent")
+    when "interval_limit"
+      check_interval_value(member, "user_budget ")
+    else 
+      log_stderr("User #{current_user.id}: has no interval")
+      return false;
+    end
+  end
+
+  def check_interval_5_days
+    today = Date.today
+    [5, 10, 15, today.end_of_month.mday].include?(today.mday)
+  end
+
+  def check_interval_weekly
+    today = Date.today
+    [7, 14, 21, today.end_of_month.mday].include?(today.mday)
+  end
+
+  def check_interval_value(member, field)
+    today = Date.today.mday
+    member.alertSentFlag = true if today == 1
+
+    if !member.alertSentFlag
+      if current_user["#{field}"] < member.total_spending 
+        return false
+      else
+        member.alertSentFlag = true
+        return true
+      end
+    end
+  end
 
   def get_connect_widget
     @widget = ::Atrium::Connect.create user_guid: "#{current_user.guid}"

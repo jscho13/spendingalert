@@ -4,7 +4,12 @@ class User < ApplicationRecord
 
   validates :phone_number, phone: true
 
-  attr_accessor :total_spending, :members
+  attr_accessor :total_spending,
+                :members,
+                :notify_user,
+                :notification_interval,
+                :notification_percent,
+                :notification_type
 
   def send_message
     message = "SpendingAlert:\n
@@ -23,7 +28,29 @@ class User < ApplicationRecord
     end
   end
 
+  def notify_user
+    case user.notificationType
+    when "email"
+      notifyEmail
+    when "text"
+      notifyText
+    when "emailText"
+      notifyEmailText
+    else
+      log_stderr("User #{@user.id}: has no notification type")
+    end
+  end
+
   private
+
+  def notifyEmail
+  end
+
+  def notifyText
+  end
+
+  def notifyEmailText
+  end
 
   def create_mx_user
     begin
