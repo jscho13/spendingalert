@@ -4,20 +4,8 @@ class User < ApplicationRecord
 
   validates :phone_number, phone: true
 
-  attr_accessor :total_spending,
-                :members,
-                :notify_user,
-                :notification_interval,
-                :notification_percent,
-                :notification_type
-
-  def send_message
-    message = "SpendingAlert:\n
-              $#{self.user_budget} Spending Limit\n
-              $#{self.current_spending} Spent so far\n
-              $#{self.user_budget-self.current_spending} left to spend or save!"
-    TwilioTextMessenger.new(message).call(self.phone_number)
-  end
+  attr_accessor :members,
+                :updated_total_spending 
 
   def has_guid?
     if self.guid.nil?
@@ -29,33 +17,83 @@ class User < ApplicationRecord
   end
 
   def notify_user
-    case user.notificationType
+    case self.notification_type
     when "email"
-      notifyEmail
+      notify_email
     when "text"
-      notifyText
-    when "emailText"
-      notifyEmailText
+      notify_text
+    when "email_text"
+      notify_email_text
     else
-      log_stderr("User #{@user.id}: has no notification type")
+      log_stderr("User #{self.id}: has no notification type")
+    end
+  end
+
+  def notification_date?
+    case self.notification_interval
+    when "interval_5_days"
+      return check_interval_5_days
+    when "interval_weekly"
+      return check_interval_weekly
+    when "interval_percent"
+      return check_interval_value("notification_percent")
+    when "interval_limit"
+      return check_interval_value("user_budget ")
+    else 
+      log_stderr("User #{self.id}: has no interval")
+      return false;
     end
   end
 
   private
 
-  def notifyEmail
+  def check_interval_5_days
+    today = Date.today
+    [5, 10, 15, today.end_of_month.mday].include?(today.mday)
   end
 
-  def notifyText
+  def check_interval_weekly
+    today = Date.today
+    [7, 14, 21, today.end_of_month.mday].include?(today.mday)
   end
 
-  def notifyEmailText
+  def check_interval_value(field)
+    self.alert_sent_flag = true if Date.today.mday == 1
+
+    if !self.alert_sent_flag
+      if self["#{field}"] < self.total_spending 
+        return false
+      else
+        self.alert_sent_flag = true
+        return true
+      end
+    end
+  end
+
+  def notify_email
+  end
+
+  def notify_text
+    message = "SpendingAlert:\n
+              $#{self.user_budget} Spending Limit\n
+              $#{self.total_spending} Spent so far\n
+              $#{self.user_budget-self.total_spending} left to spend or save!\n\n"
+    if (self.total_spending <= self.user_budget)
+      message << "Good job you are on track to save this month!"
+    else
+      message << "Slow down your on a spending spree!"
+    end
+    TwilioTextMessenger.new(message).call(self.phone_number)
+  end
+
+  def notify_email_text
+    notify_email
+    notify_text
   end
 
   def create_mx_user
     begin
       user = ::Atrium::User.create identifier: "#{self.id}", is_disabled: "", metadata: "{\"email\": \"#{self.email}\"}"
-      binding.pry
       self.update_attribute(:guid, user.guid)
     rescue
       users = ::Atrium::User.list

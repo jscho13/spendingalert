@@ -15,9 +15,9 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(
       :user_budget,
-      :notificationInterval,
-      :notificationType,
-      :notificationPercent
+      :notification_interval,
+      :notification_type,
+      :notification_percent
     )
   end
 end

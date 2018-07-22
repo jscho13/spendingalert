@@ -13,7 +13,7 @@
         <%= f.number_field :notification_percent, placeholder: 'Enter % Limit', class: 'preferences-input' %>%</br></br>
       </div>
 
-      <%= select_tag(:notification_type, options_for_select([['Email (free)', 'email'],['Text', 'text'], ['Text and Email', 'emailText']])) %></br></br>
+      <%= select_tag(:notification_type, options_for_select([['Email (free)', 'email'],['Text', 'text'], ['Text and Email', 'email_text']])) %></br></br>
 
       <%= f.submit "Submit" %>
     <% end %>
