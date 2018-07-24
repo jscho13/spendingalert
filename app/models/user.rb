@@ -5,7 +5,7 @@ class User < ApplicationRecord
   validates :phone_number, phone: true
 
   attr_accessor :members,
-                :updated_total_spending 
+                :updated_total_spending
 
   def has_guid?
     if self.guid.nil?
@@ -38,11 +38,16 @@ class User < ApplicationRecord
     when "interval_percent"
       return check_interval_value("notification_percent")
     when "interval_limit"
-      return check_interval_value("user_budget ")
+      return check_interval_value("user_budget")
     else 
       log_stderr("User #{self.id}: has no interval")
       return false;
     end
+  end
+
+  def get_all_transactions
+    params = { user_guid: self.guid, from_date: (Date.today.at_beginning_of_month).to_s }
+    ::Atrium::Transaction.list params
   end
 
   private
@@ -58,9 +63,12 @@ class User < ApplicationRecord
   end
 
   def check_interval_value(field)
-    self.alert_sent_flag = true if Date.today.mday == 1
+    self.alert_sent_flag = false if Date.today.mday == 1
 
     if !self.alert_sent_flag
+      transactions = self.get_all_transactions
+      self.total_spending = transactions.sum(&:amount)
+
       if self["#{field}"] < self.total_spending 
         return false
       else
@@ -77,7 +85,7 @@ class User < ApplicationRecord
     message = "SpendingAlert:\n
               $#{self.user_budget} Spending Limit\n
               $#{self.total_spending} Spent so far\n
-              $#{self.user_budget-self.total_spending} left to spend or save!\n\n"
+              $#{self.user_budget - self.total_spending} left to spend or save!\n\n"
     if (self.total_spending <= self.user_budget)
       message << "Good job you are on track to save this month!"
     else

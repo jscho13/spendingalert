@@ -16,6 +16,6 @@ Rails.application.routes.draw do
 
   post 'charge', to: 'subscriptions#charge'
 
-  get '/subscriptions/send_message', to: 'subscriptions#send_message', as: 'send_message'
-  get '/subscriptions/send_messages', to: 'subscriptions#send_messages', as: 'send_messages'
+  get 'send_message', to: 'subscriptions#send_message', as: 'send_message'
+  get 'send_messages', to: 'subscriptions#send_messages', as: 'send_messages'
 end

@@ -3,17 +3,21 @@
     <%= form_for(@user) do |f| %>
       <h3>Set Spending Limit</h3>
       <%= f.label :user_budget, "Monthly Spending Limit" %></br>
-      $<%= f.number_field :user_budget, placeholder: 'Enter Amount', class: 'preferences-input' %></br></br></br>
+      $<%= f.number_field :user_budget, placeholder: 'Enter Amount', class: 'preferences-input' %>
+      </br></br></br>
 
 
       <h3>Alert Schedule</h3>
-      <%= select_tag(:notification_interval, options_for_select([['Every 5 Days (5th, 10th, 15th, Last Day of Month)','interval_5_days'],['Weekly (7th, 14th, 21st, Last Day of Month)', 'interval_weekly'],['% of Spending', 'interval_percent'],['Only When I Hit My Budget', 'interval_limit']])) %></br></br>
+      <%= f.select(:notification_interval, options_for_select([['Every 5 Days (5th, 10th, 15th, Last Day of Month)','interval_5_days'],['Weekly (7th, 14th, 21st, Last Day of Month)', 'interval_weekly'],['% of Spending', 'interval_percent'],['Only When I Hit My Budget', 'interval_limit']], @user.notification_interval)) %>
+      </br></br>
 
       <div id="notification_percent">
-        <%= f.number_field :notification_percent, placeholder: 'Enter % Limit', class: 'preferences-input' %>%</br></br>
+        <%= f.number_field :notification_percent, placeholder: 'Enter % Limit', class: 'preferences-input' %>%
+        </br></br>
       </div>
 
-      <%= select_tag(:notification_type, options_for_select([['Email (free)', 'email'],['Text', 'text'], ['Text and Email', 'email_text']])) %></br></br>
+      <%= f.select(:notification_type, options_for_select([['Email (free)', 'email'],['Text', 'text'], ['Text and Email', 'email_text']], @user.notification_type)) %>
+      </br></br>
 
       <%= f.submit "Submit" %>
     <% end %>

@@ -12,7 +12,7 @@ class SubscriptionsController < ApplicationController
     @user.has_guid? #TODO: move this into Devise controller to run once
     @user.members = get_all_memberships
 
-    transactions = get_all_transactions(current_user)
+    transactions = current_user.get_all_transactions
     @user.updated_total_spending = transactions.sum(&:amount)
   end
 
@@ -22,6 +22,9 @@ class SubscriptionsController < ApplicationController
       user = User.find(u.id)
       user.notify_user
     end
+
+    #TODO: Get this better
+    render json: []
   end
 
 #   def payment
@@ -49,9 +52,6 @@ class SubscriptionsController < ApplicationController
     users = mx_users.map { |u| User.find(u.identifier.to_i) }
     users.each do |u|
       if u.notification_date?
-        transactions = get_all_transactions(u)
-        u.total_spending = transactions.sum(&:amount)
-
         unnotified_users << u.id    
       end
     end
@@ -66,12 +66,7 @@ class SubscriptionsController < ApplicationController
     ::Atrium::Member.list user_guid: "#{current_user.guid}"
   end
 
-  def get_all_transactions(user)
-    params = { user_guid: user.guid, from_date: (Date.today.at_beginning_of_month).to_s }
-    ::Atrium::Transaction.list params
-  end
-
-  def get_all_users
+  def get_all_mx_users
     ::Atrium::User.list
   end
 end
