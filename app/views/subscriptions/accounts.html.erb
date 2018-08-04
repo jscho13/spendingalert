@@ -1,8 +1,13 @@
 <h3>Connect More Accounts</h3>
+<div id='addAccount'>Mx Widget Here</div>
 
-<div class="box-container">
-  <div id='addAccount' class='box'>Mx Widget Here</div>
-</div>
+<h3>Remove Accounts</h3>
+<ul>
+  <% @user.members.each do |name| %>
+    <%= button_to 'x', {controller: "subscriptions", action: "delete_mx_member", member_guid: name.guid}, method: :delete  %>
+    <li class="dashboard__member"><%= name.name %></ul>
+  <% end %>
+</ul>
 
 <script src="https://atrium.mx.com/connect.js"></script>
 <script>

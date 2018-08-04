@@ -1,5 +1,8 @@
 class SubscriptionsController < ApplicationController
   def accounts
+    @user = current_user
+    @user.members = get_all_memberships
+
     get_connect_widget
   end
 
@@ -27,6 +30,11 @@ class SubscriptionsController < ApplicationController
     render json: []
   end
 
+  def delete_mx_member
+    member = get_mx_member(params[:member_guid])
+    member.delete
+  end
+
 #   def payment
 #   end
 # 
@@ -45,6 +53,12 @@ class SubscriptionsController < ApplicationController
 #   end
 
   private
+
+  def subscription_params
+    params.permit(
+      :member_guid
+    )
+  end
 
   def get_unnotified_users
     unnotified_users = []
@@ -69,4 +83,9 @@ class SubscriptionsController < ApplicationController
   def get_all_mx_users
     ::Atrium::User.list
   end
+
+  def get_mx_member(member_guid)
+    ::Atrium::Member.read user_guid: "#{current_user.guid}", member_guid: "#{member_guid}"
+  end
+
 end

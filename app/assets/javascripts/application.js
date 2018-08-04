@@ -13,9 +13,12 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
+//= require js/skel.min.js
 //= require_tree .
 
-$(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
+  $("body").append('<script src="/assets/js/main.js"></script>');
+
   checkNotificationInterval();
 
   $("select#notification_interval").on("change", function() {

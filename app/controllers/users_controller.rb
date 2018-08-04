@@ -10,6 +10,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def show
+    redirect_to root_path
+  end
+
 	private
 
   def user_params

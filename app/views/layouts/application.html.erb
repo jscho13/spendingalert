@@ -3,7 +3,7 @@
   <head>
     <title>SpendingAlert</title>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => false %>
     <%= csrf_meta_tags %>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
@@ -27,37 +27,27 @@
             </header>
             <ul>
               <li>
-                <a href="index.html">Homepage</a>
+                <a href="/">Why Sign Up?</a>
               </li>
               <li>
-                <a href="generic.html">Generic</a>
+                <a href="/dashboard">Monthly Spending</a>
               </li>
               <li>
-                <a href="elements.html">Elements</a>
+                <a href="/budget">Set Spending Limit (Budget)</a>
               </li>
               <li>
-                <span class="opener">Submenu</span>
-                <ul>
-                  <li>
-                    <a href="#">Lorem Dolor</a>
-                  </li>
-                  <li>
-                    <a href="#">Ipsum Adipiscing</a>
-                  </li>
-                  <li>
-                    <a href="#">Tempus Magna</a>
-                  </li>
-                  <li>
-                    <a href="#">Feugiat Veroeros</a>
-                  </li>
-                </ul>
+                <a href="#">60 Day Free Trial</a>
               </li>
               <li>
-                <a href="#">Etiam Dolore</a>
+                <a href="#">Contact Us</a>
               </li>
-              <li>
-                <a href="#">Adipiscing</a>
-              </li>
+              <% if current_user %>
+                <li><a href="/users/edit">Settings</a></li>
+                <li><a href="/users/sign_out" data-method="delete">Log Out</a></li>
+              <% else %>
+                <li><a href="/users/sign_up">Sign Up</a></li>
+                <li><a href="/users/sign_in">Log In</a></li>
+              <% end %>
             </ul>
           </nav>
         </div>
@@ -71,16 +61,6 @@
           <% else %>
             <a href="/" class="logo"><image src="/spendingalertlogo2.svg"></image></a>
           <% end %>
-					
-					<ul class="icons">
-						<% if current_user %>
-							<li><a class="button" href="/users/edit">Settings</a></li>
-							<li><a class="button" href="/users/sign_out" data-method="delete">Log Out</a></li>
-						<% else %>
-							<li><a class="button" href="/users/sign_in">Log In</a></li>
-							<li><a class="button" href="/users/sign_up">Sign Up</a></li>
-						<% end %>
-					</ul>
 				</header>
 
 				<main>
@@ -101,13 +81,14 @@
             <a href="#">info@spendingalert.com</a>
           </li>
           <li class="fa-phone">(603) 642-6161</li>
-          <li class="fa-home">1234 Somewhere Road #8254<br/>
-            Nashville, TN 00000-0000</li>
+          <li class="fa-home">SpendingAlert, LLC.<br/>
+            PO Box 64<br/>
+            East Hampstead, NH 03826</li>
         </ul>
       </section>
 
       <p class="copyright">
-        &copy; Untitled. All rights reserved.
+        &copy; SpendingAlert. All rights reserved.
       </p>
     </footer>
 
