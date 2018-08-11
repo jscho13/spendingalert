@@ -4,8 +4,10 @@
 <h3>Remove Accounts</h3>
 <ul>
   <% @user.members.each do |name| %>
-    <%= button_to 'x', {controller: "subscriptions", action: "delete_mx_member", member_guid: name.guid}, method: :delete  %>
-    <li class="dashboard__member"><%= name.name %></ul>
+    <div class="remove-account__item" >
+      <%= button_to 'x', {controller: "subscriptions", action: "delete_mx_member", member_guid: name.guid}, method: :delete %>
+      <li class="dashboard__member"><%= name.name %></ul>
+    </div>
   <% end %>
 </ul>
 
