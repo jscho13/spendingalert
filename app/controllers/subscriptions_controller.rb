@@ -33,7 +33,7 @@ class SubscriptionsController < ApplicationController
   def delete_mx_member
     member = get_mx_member(params[:member_guid])
     member.delete
-    render "subscriptions/dashboard"
+    redirect_to dashboard_path
   end
 
 #   def payment
