@@ -3,7 +3,7 @@
     <h3>Current Accounts</h3>
     <ul>
       <% @user.members.each do |name| %>
-        <li class="dashboard__member"><%= name.name %></ul>
+        <li class="dashboard__member"><%= name.name %></li>
       <% end %>
     </ul>
     <h5><a href="/accounts">Update Accounts</a></h5>

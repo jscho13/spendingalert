@@ -11,21 +11,22 @@
   <% end %>
 </ul>
 
-<script src="https://atrium.mx.com/connect.js"></script>
 <script>
-  var mxConnect = new MXConnect({
-    id: 'addAccount',
-    url: '<%= @widget.attributes["connect_widget_url"] %>',
-    onLoad: function () {
-      // Add accounts widget successfully loaded
-      console.log('On Load');
-    },
-    onSuccess: function (memberGuid) {
-      // Member created successfully
-      console.log('On Success');
-    }
-  });
+  function loadMxWidget() {
+    var mxConnect = new MXConnect({
+      id: 'addAccount',
+      url: '<%= @widget.attributes["connect_widget_url"] %>',
+      onLoad: function () {
+        // Add accounts widget successfully loaded
+        console.log('On Load');
+      },
+      onSuccess: function (memberGuid) {
+        // Member created successfully
+        console.log('On Success');
+      }
+    });
 
-  mxConnect.load();
+    mxConnect.load();
+  }
 </script>
-
+<script onload="loadMxWidget();" src="https://atrium.mx.com/connect.js"></script>

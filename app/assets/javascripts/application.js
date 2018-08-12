@@ -43,3 +43,4 @@ function checkNotificationInterval() {
     $("#notification_percent").hide();
   }
 }
+
