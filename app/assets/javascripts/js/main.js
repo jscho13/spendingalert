@@ -25,7 +25,7 @@
 		// Disable animations/transitions ...
 
 			// ... until the page has loaded.
-				$body.addClass('is-loading');
+				//$body.addClass('is-loading');
 
 				$window.on('load', function() {
 					setTimeout(function() {
@@ -87,13 +87,13 @@
 				$sidebar_inner = $sidebar.children('.inner');
 
 			// Inactive by default on <= large.
-				skel
-					.on('+large', function() {
-						$sidebar.addClass('inactive');
-					})
-					.on('-large !large', function() {
-						$sidebar.removeClass('inactive');
-					});
+// 				skel
+// 					.on('+large', function() {
+// 						$sidebar.addClass('inactive');
+// 					})
+// 					.on('-large !large', function() {
+// 						$sidebar.removeClass('inactive');
+// 					});
 
 			// Hack: Workaround for Chrome/Android scrollbar position bug.
 				if (skel.vars.os == 'android'

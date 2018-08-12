@@ -50,7 +50,7 @@
 
   @include breakpoint(small) {
     > .inner {
-      @include padding(0, 2em);
+      @include padding(0, 0.5em);
 
       > section {
         @include padding(3em, 0);

@@ -17,8 +17,6 @@
 //= require_tree .
 
 document.addEventListener("turbolinks:load", function() {
-  $("body").append('<script src="/assets/js/main.js"></script>');
-
   checkNotificationInterval();
 
   $("select#notification_interval").on("change", function() {

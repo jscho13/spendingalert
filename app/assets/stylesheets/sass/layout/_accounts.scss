@@ -1,8 +1,13 @@
 .remove-account__item {
   align-items: center;
   display: flex;
+  padding-bottom: 0.5em;
 
   form {
     margin: 0;
+  }
+
+  li {
+    list-style-type: none;
   }
 }

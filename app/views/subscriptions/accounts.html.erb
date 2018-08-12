@@ -6,7 +6,7 @@
   <% @user.members.each do |name| %>
     <div class="remove-account__item" >
       <%= button_to 'x', {controller: "subscriptions", action: "delete_mx_member", member_guid: name.guid}, method: :delete %>
-      <li class="dashboard__member"><%= name.name %></ul>
+      <li><%= name.name %></li>
     </div>
   <% end %>
 </ul>
