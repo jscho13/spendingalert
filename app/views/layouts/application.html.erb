@@ -26,22 +26,17 @@
               <h2>Menu</h2>
             </header>
             <ul>
-              <li>
-                <a href="/">Why Sign Up?</a>
-              </li>
-              <li>
-                <a href="/users/sign_up">60 Day Free Trial</a>
-              </li>
-              <li>
-                <a href="#">Contact Us</a>
-              </li>
               <% if current_user %>
+                <li><a href="/">Why Sign Up?</a></li>
                 <li><a href="/dashboard">Monthly Spending</a></li>
                 <li><a href="/budget">Set Spending Limit</a></li>
                 <li><a href="/accounts">Add Accounts</a></li>
                 <li><a href="/users/edit">Settings</a></li>
                 <li><a href="/users/sign_out" data-method="delete">Log Out</a></li>
               <% else %>
+                <li><a href="/">Why Sign Up?</a></li>
+                <li><a href="/users/sign_up">60 Day Free Trial</a></li>
+                <li><a onclick="scrollToBottom()" href="#">Contact Us</a></li>
                 <li><a href="/users/sign_up">Sign Up</a></li>
                 <li><a href="/users/sign_in">Log In</a></li>
               <% end %>
