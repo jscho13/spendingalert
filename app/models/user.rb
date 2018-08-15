@@ -46,7 +46,7 @@ class User < ApplicationRecord
   end
 
   def get_all_transactions
-    params = { user_guid: self.guid, from_date: (Date.today.at_beginning_of_month).to_s }
+    params = { user_guid: self.guid, from_date: (Date.today - Date.today.mday + 1).to_s }
     ::Atrium::Transaction.list params
   end
 
