@@ -15,8 +15,8 @@ class SubscriptionsController < ApplicationController
     @user.has_guid? #TODO: move this into Devise controller to run once
     @user.members = get_all_memberships
 
-    transactions = current_user.get_all_transactions
-    @user.updated_total_spending = transactions.sum(&:amount)
+    @transactions = current_user.get_all_transactions
+    @user.updated_total_spending = @transactions.sum(&:amount)
   end
 
   def send_messages

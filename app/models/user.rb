@@ -46,8 +46,11 @@ class User < ApplicationRecord
   end
 
   def get_all_transactions
-    params = { user_guid: self.guid, from_date: (Date.today - Date.today.mday + 1).to_s }
-    ::Atrium::Transaction.list params
+    params = { user_guid: self.guid }
+    from_date = Date.today - Date.today.mday + 1
+
+    transactions = ::Atrium::Transaction.list params
+    transactions.select { |i| Date.parse(i.date) >= from_date }
   end
 
   private
