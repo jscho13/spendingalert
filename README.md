@@ -1,24 +1,8 @@
-# README
+## README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+https://spendingalert.herokuapp.com/
 
-Things you may want to cover:
+This app runs out Ruby 2.5.1, and Rails 5.2.0
+It has a number of API integrations. Namely MxTechnologies, Stripe, and Twilio.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+For the database you'll need to run  MySql instead of the default Postgres.
