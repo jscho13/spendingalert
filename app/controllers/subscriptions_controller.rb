@@ -1,4 +1,6 @@
 class SubscriptionsController < ApplicationController
+	before_action :authenticate_user!
+
   def accounts
     @user = current_user
     @user.members = get_all_memberships
