@@ -1,5 +1,5 @@
 class SubscriptionsController < ApplicationController
-	before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def accounts
     @user = current_user
@@ -54,6 +54,9 @@ class SubscriptionsController < ApplicationController
 # 
 #     render json: subscription
 #   end
+
+
+
 
   private
 

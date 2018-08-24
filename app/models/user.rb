@@ -53,6 +53,8 @@ class User < ApplicationRecord
     transactions.select { |i| Date.parse(i.date) >= from_date }
   end
 
+
+
   private
 
   def check_interval_5_days

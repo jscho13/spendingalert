@@ -4,8 +4,14 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+one:
+  phone_number: 7818542810
+  email: jscho13@gmail.com
+  notification_interval: "interval_weekly"
+  notification_type: "text"
+
+two:
+  phone_number: 7811235343
+  email: test@example.com
+  notification_interval: "interval_5_days"
+  notification_type: "text"
