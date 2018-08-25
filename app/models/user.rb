@@ -35,8 +35,9 @@ class User < ApplicationRecord
       return check_interval_5_days
     when "interval_weekly"
       return check_interval_weekly
-    when "interval_percent"
-      return check_interval_value("notification_percent")
+# This won't work. We need to convert percent into a dollar amount
+#     when "interval_percent"
+#       return check_interval_value("notification_percent")
     when "interval_limit"
       return check_interval_value("user_budget")
     else 
@@ -74,7 +75,7 @@ class User < ApplicationRecord
       transactions = self.get_all_transactions
       self.total_spending = transactions.sum(&:amount)
 
-      if self["#{field}"] < self.total_spending 
+      if self.total_spending < self[field] 
         return false
       else
         self.alert_sent_flag = true

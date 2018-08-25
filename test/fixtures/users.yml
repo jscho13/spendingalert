@@ -7,11 +7,6 @@
 one:
   phone_number: 7818542810
   email: jscho13@gmail.com
-  notification_interval: "interval_weekly"
   notification_type: "text"
-
-two:
-  phone_number: 7811235343
-  email: test@example.com
-  notification_interval: "interval_5_days"
-  notification_type: "text"
+  alert_sent_flag: false
+  user_budget: 500

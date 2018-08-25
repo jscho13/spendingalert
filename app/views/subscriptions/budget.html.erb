@@ -8,7 +8,7 @@
 
 
       <h3>Alert Schedule</h3>
-      <%= f.select(:notification_interval, options_for_select([['Every 5 Days (5th, 10th, 15th, Last Day of Month)','interval_5_days'],['Weekly (7th, 14th, 21st, Last Day of Month)', 'interval_weekly'],['% of Spending', 'interval_percent'],['Only When I Hit My Budget', 'interval_limit']], @user.notification_interval)) %>
+      <%= f.select(:notification_interval, options_for_select([['Every 5 Days (5th, 10th, 15th, Last Day of Month)','interval_5_days'],['Weekly (7th, 14th, 21st, Last Day of Month)', 'interval_weekly'],['Only When I Hit My Budget', 'interval_limit']], @user.notification_interval)) %>
       </br></br>
 
       <div id="notification_percent">
