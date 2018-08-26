@@ -111,6 +111,7 @@ HEREDOC
 
   def notify_text
     message = compose_message
+    puts "Message composed as: #{compose_message}"
     TwilioTextMessenger.new(message).call(self.phone_number)
   end
 
