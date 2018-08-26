@@ -10,3 +10,4 @@ one:
   notification_type: "text"
   alert_sent_flag: false
   user_budget: 500
+  total_spending: 400

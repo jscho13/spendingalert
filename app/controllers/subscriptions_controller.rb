@@ -24,7 +24,6 @@ class SubscriptionsController < ApplicationController
   def send_messages
     users_to_be_notified = get_unnotified_users
     users_to_be_notified.each do |u|
-      user = User.find(u.id)
       user.notify_user
     end
 
@@ -72,7 +71,7 @@ class SubscriptionsController < ApplicationController
     users = mx_users.map { |u| User.find(u.identifier.to_i) }
     users.each do |u|
       if u.notification_date?
-        unnotified_users << u.id    
+        unnotified_users << u
       end
     end
     unnotified_users 
