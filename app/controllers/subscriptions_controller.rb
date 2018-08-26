@@ -23,6 +23,7 @@ class SubscriptionsController < ApplicationController
 
   def send_messages
     users_to_be_notified = get_unnotified_users
+    binding.pry
     users_to_be_notified.each do |u|
       user.notify_user
     end
