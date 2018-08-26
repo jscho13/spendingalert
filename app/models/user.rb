@@ -57,20 +57,20 @@ class User < ApplicationRecord
   def compose_message
     message =
 <<-HEREDOC
-SpendingAlert:\n
-$#{self.user_budget} Spending Limit\n
-$#{self.total_spending} Spent so far\n
+SpendingAlert:
+$#{self.user_budget} Spending Limit
+$#{self.total_spending} Spent so far
 HEREDOC
     if (self.total_spending <= self.user_budget)
       message +
 <<-HEREDOC
-$#{self.user_budget - self.total_spending} left to spend!\n\n
+$#{self.user_budget - self.total_spending} left to spend!\n
 Good job you are on track to save this month!
 HEREDOC
     else
       message +
 <<-HEREDOC
-You've overspent by $#{self.total_spending - self.user_budget}!\n\n
+You've overspent by $#{self.total_spending - self.user_budget}!\n
 Slow down your on a spending spree!
 HEREDOC
     end
