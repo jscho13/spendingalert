@@ -16,7 +16,7 @@
         </br></br>
       </div>
 
-      <%= f.select(:notification_type, options_for_select([['Email (free)', 'email'],['Text', 'text'], ['Text and Email', 'email_text']], @user.notification_type)) %>
+      <%= f.select(:notification_type, options_for_select([['Email', 'email'],['Text', 'text'], ['Text and Email', 'email_text']], @user.notification_type)) %>
       </br></br>
 
       <%= f.submit "Submit" %>
