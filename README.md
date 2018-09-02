@@ -1,6 +1,6 @@
 ## README
 
-https://spendingalert.herokuapp.com/
+https://spendingalert.com/
 
 This app runs out Ruby 2.5.1, and Rails 5.2.0
 It has a number of API integrations. Namely MxTechnologies, Stripe, and Twilio.
