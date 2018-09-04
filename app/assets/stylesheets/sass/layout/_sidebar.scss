@@ -13,7 +13,7 @@
 
 			&:before {
 				@include vendor('transform', 'scaleX(-1)');
-				color: _palette(fg);
+				color: _palette(accent);
 				content: '\f002';
 				cursor: default;
 				display: block;
@@ -200,15 +200,14 @@
 				width: 7.25em;
 
 				&:before {
-					color: _palette(fg);
-					margin-left: (-0.125em / 2);
-					margin-top: (-0.5em / 2);
+					color: _palette(accent);
+					margin-left: -0.5em;
+					margin-top: -0.5em;
 					font-size: 1.1rem;
 					z-index: 1;
 				}
 
 				&:after {
-					background: transparentize(lighten(_palette(fg), 35), 0.25);
 					border-radius: _size(border-radius);
 					content: '';
 					height: 3.5em;
