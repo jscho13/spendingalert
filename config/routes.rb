@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'budget', to: 'subscriptions#budget', as: 'budget'
   get 'dashboard', to: 'subscriptions#dashboard', as: 'dashboard'
   get 'payment', to: 'subscriptions#payment'
+  get 'transactions', to: 'subscriptions#transactions'
   delete 'delete_mx_member', to: 'subscriptions#delete_mx_member'
 
   #WIP

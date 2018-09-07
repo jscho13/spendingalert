@@ -21,6 +21,10 @@ class SubscriptionsController < ApplicationController
     @user.updated_total_spending = @transactions.sum(&:amount)
   end
 
+  def transactions
+    @transactions = current_user.get_all_transactions
+  end
+
   def send_messages
     users_to_be_notified = get_unnotified_users
     users_to_be_notified.each do |u|

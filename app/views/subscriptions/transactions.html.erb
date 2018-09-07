@@ -1,0 +1,14 @@
+<div class="box-container">
+  <div class="box">
+    <h3>Transaction List</h3>
+    <ul>
+      <% @transactions.each do |item| %>
+        <li><b>Item</b></li>
+        <li>Date: <%= item.date %>
+        <li>Amount: <%= item.amount %>
+        <li>Type: <%= item.type %>
+        <li>Description: <%= item.original_description %>
+      <% end %>
+    </ul>
+  </div>
+</div>

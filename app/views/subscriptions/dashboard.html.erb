@@ -6,38 +6,21 @@
         <li class="dashboard__member"><%= name.name %></li>
       <% end %>
     </ul>
-    <h5><a href="/accounts">Update Accounts</a></h5>
+    <h5><a href="/accounts">add/delete accounts</a></h5>
   </div>
 </div>
 
 <div class="box-container">
   <div class="box">
-    <h3>Current Budget</h3>
-    <p><%= number_to_currency(@user.user_budget, precision: 2) %></p>
-    <h5><a href="/budget">Update Preferences</a></h5>
+    <h3>Spending Limit</h3>
+    <p><%= number_to_currency(@user.user_budget, precision: 2) %> per month</p>
+    <h5><a href="/budget">change limit/alerts</a></h5>
   </div>
 </div>
 
 <div class="box-container">
   <div class="box">
-    <h3>Total Spending for the Month</h3>
-    <p><%= number_to_currency(@user.updated_total_spending, precision: 2) %></p>
+    <h3>Total Spending</h3>
+    <p><%= number_to_currency(@user.updated_total_spending, precision: 2) %> this month</p>
   </div>
 </div>
-
-<% if false %>
-<div class="box-container">
-  <div class="box">
-    <h3>Transaction List</h3>
-    <ul>
-      <% @transactions.each do |item| %>
-        <li><b>Item</b></li>
-        <li>Date: <%= item.date %>
-        <li>Amount: <%= item.amount %>
-        <li>Type: <%= item.type %>
-        <li>Description: <%= item.original_description %>
-      <% end %>
-    </ul>
-  </div>
-</div>
-<% end %>
