@@ -4,7 +4,13 @@
 }
 
 .budget-image {
-  width: 20%;
+  @include breakpoint(xlarge) {
+    width: 15%;
+  }
+
+  @include breakpoint(small) {
+    width: 20%;
+  }
 }
 
 input[type=number]::-webkit-inner-spin-button,
