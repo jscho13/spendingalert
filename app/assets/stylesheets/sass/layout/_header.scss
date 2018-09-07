@@ -37,6 +37,7 @@ header {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 1;
 
   @include vendor('display', 'flex');
   border-bottom: solid 5px _palette(accent);
