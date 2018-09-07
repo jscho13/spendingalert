@@ -1,0 +1,14 @@
+.budget-input {
+  text-align: center;
+  width: 80px;
+}
+
+.budget-image {
+  width: 45%;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
