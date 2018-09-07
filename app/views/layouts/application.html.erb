@@ -50,9 +50,9 @@
 				<!-- Header -->
 				<header id="header">
           <% if current_user %>
-            <a href="/dashboard" class="logo"><image src="/spendingalertlogo4.png"></image></a>
+            <a href="/dashboard" class="logo"><img src="/spendingalertlogo4.png"></img></a>
           <% else %>
-            <a href="/" class="logo"><image src="/spendingalertlogo4.png"></image></a>
+            <a href="/" class="logo"><img src="/spendingalertlogo4.png"></img></a>
           <% end %>
 				</header>
 
@@ -65,29 +65,50 @@
 
     <!-- Footer -->
     <footer>
-      <section>
+      <section class="footer-links">
         <header class="major">
-          <h2>Get in touch</h2>
+          <h3>WHY CHOOSE US</h3>
         </header>
-        <ul class="contact">
-          <li class="fas fa-envelope-o">
-            <a href="#">info@spendingalert.com</a>
-          </li>
-          <li class="fas fa-phone">(603) 642-6161</li>
-          <li class="fas fa-home">SpendingAlert, LLC.<br/>
-            PO Box 64<br/>
-            East Hampstead, NH 03826</li>
-        </ul>
+        <header class="major">
+          <h3>60 DAY FREE TRIAL</h3>
+        </header>
+        <header class="major">
+          <h3>LOG IN</h3>
+        </header>
+        <header class="major">
+          <h3>BLOG</h3>
+        </header>
       </section>
 
+<!--
+      <ul class="contact">
+        <li class="fas fa-envelope-o">
+          <a href="#">info@spendingalert.com</a>
+        </li>
+        <li class="fas fa-phone">(603) 642-6161</li>
+        <li class="fas fa-home">SpendingAlert, LLC.<br/>
+          PO Box 64<br/>
+          East Hampstead, NH 03826</li>
+      </ul>
+-->
+
       <p class="copyright">
-        &copy; SpendingAlert. All rights reserved.
+        &copy; SpendingAlert is operated by SpendingAlert LLC. All rights reserved.<br> Terms, conditions, features, pricing are subject to change without notice.
       </p>
+      <p class="text-center">
+        <a class="text-white" href="/">Terms of Use</a> | <a class="text-white" href="/">Privacy Policy</a>
+      </p>
+      <div class="footer-logo"><img src="/spendingalertlogo-white.png"></img></div>
     </footer>
 
   </body>
 
   <link rel="stylesheet" href="assets/application.css" />
+  <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+  <!-- Scripts -->
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <script src="assets/js/skel.min.js"></script>
+  <script src="assets/js/util.js"></script>
   <!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
   <script src="assets/js/main.js"></script>
 </html>

@@ -10,17 +10,44 @@ footer {
   background-color: _palette(fg-bold); 
   color: white;
   padding: 1em 2em;
+  
+  .footer-links {
+    display: flex;
+    justify-content: center;
 
-  h2 {
-    color: white;
+    @include breakpoint(small) {
+      flex-direction: column;
+    }
+
+    .major {
+      padding: 1em;
+    }
+
+    h3 {
+      color: white;
+    }
   }
 
   .copyright {
     color: _palette(fg-light);
     font-size: 0.9em;
+    text-align: center;
 
     a {
       color: inherit;
     }
   }
+
+  .footer-logo {
+    text-align: center;
+
+    img {
+      width: 25%;
+      @include breakpoint(small) {
+        width: 70%;
+      }
+    }
+  }
+
 }
+
