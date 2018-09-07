@@ -32,9 +32,14 @@ header {
 }
 
 #header {
+  background-color: white;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
   @include vendor('display', 'flex');
   border-bottom: solid 5px _palette(accent);
-  position: relative;
 
   > * {
     @include vendor('flex', '1');
@@ -47,9 +52,10 @@ header {
     font-family: _font(family-heading);
     font-size: 1.125em;
     text-align: center;
+    margin-top: 1em;
 
     img {
-      max-height: 6em;
+      max-height: 5em;
       // Use width 100% if we switch back to svg
       // width: 100%
     }
