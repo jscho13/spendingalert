@@ -42,9 +42,9 @@ class SubscriptionsController < ApplicationController
     redirect_to dashboard_path
   end
 
-#   def payment
-#   end
-# 
+  def checkout
+  end
+
 #   def charge
 #     customer = Stripe::Customer.create({
 #       email: 'jscho13@gmail.com',

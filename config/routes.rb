@@ -15,8 +15,9 @@ Rails.application.routes.draw do
   get 'payment', to: 'subscriptions#payment'
   get 'transactions', to: 'subscriptions#transactions'
   delete 'delete_mx_member', to: 'subscriptions#delete_mx_member'
+  get 'checkout', to: 'subscriptions#checkout'
 
-  #WIP
+  # Action Routes
   post 'charge', to: 'subscriptions#charge'
   get 'send_message', to: 'subscriptions#send_message', as: 'send_message'
   get 'send_messages', to: 'subscriptions#send_messages', as: 'send_messages'
