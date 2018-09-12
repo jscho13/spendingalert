@@ -15,16 +15,25 @@ footer {
     display: flex;
     justify-content: center;
 
-    @include breakpoint(small) {
-      flex-direction: column;
-    }
-
     .major {
       padding: 1em;
     }
 
     h3 {
       color: white;
+      text-align: center;
+    }
+
+    @include breakpoint(xsmall) {
+      flex-direction: column;
+
+      .major {
+        padding: 0em;
+      }
+
+      h3 {
+        font-size: 1em;
+      }
     }
   }
 
