@@ -122,51 +122,51 @@
 			// Events.
 
 				// Link clicks.
-					$sidebar.on('click', 'a', function(event) {
-
-						// >large? Bail.
-							if (!skel.breakpoint('large').active)
-								return;
-
-						// Vars.
-							var $a = $(this),
-								href = $a.attr('href'),
-								target = $a.attr('target');
-
-						// Prevent default.
-							event.preventDefault();
-							event.stopPropagation();
-
-						// Check URL.
-							if (!href || href == '#' || href == '')
-								return;
-
-						// Hide sidebar.
-							$sidebar.addClass('inactive');
-
-						// Redirect to href.
-							setTimeout(function() {
-
-								if (target == '_blank')
-									window.open(href);
-								else
-									window.location.href = href;
-
-							}, 500);
-
-					});
+// 					$sidebar.on('click', 'a', function(event) {
+// 
+// 						// >large? Bail.
+// 							if (!skel.breakpoint('large').active)
+// 								return;
+// 
+// 						// Vars.
+// 							var $a = $(this),
+// 								href = $a.attr('href'),
+// 								target = $a.attr('target');
+// 
+// 						// Prevent default.
+// 							event.preventDefault();
+// 							event.stopPropagation();
+// 
+// 						// Check URL.
+// 							if (!href || href == '#' || href == '')
+// 								return;
+// 
+// 						// Hide sidebar.
+// 							$sidebar.addClass('inactive');
+// 
+// 						// Redirect to href.
+// 							setTimeout(function() {
+// 
+// 								if (target == '_blank')
+// 									window.open(href);
+// 								else
+// 									window.location.href = href;
+// 
+// 							}, 500);
+// 
+// 					});
 
 				// Prevent certain events inside the panel from bubbling.
-					$sidebar.on('click touchend touchstart touchmove', function(event) {
-
-						// >large? Bail.
-							if (!skel.breakpoint('large').active)
-								return;
-
-						// Prevent propagation.
-							event.stopPropagation();
-
-					});
+// 					$sidebar.on('click touchend touchstart touchmove', function(event) {
+// 
+// 						// >large? Bail.
+// 							if (!skel.breakpoint('large').active)
+// 								return;
+// 
+// 						// Prevent propagation.
+// 							event.stopPropagation();
+// 
+// 					});
 
 				// Hide panel on body click/tap.
 					$body.on('click touchend', function(event) {
@@ -234,9 +234,7 @@
 
 									if (y > 0)
 										$sidebar_inner
-											.data('locked', 1)
-											.css('position', 'fixed')
-											.css('top', -1 * x);
+											.data('locked', 1);
 
 								}
 
