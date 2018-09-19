@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   root to: 'welcome#index'
 
   # Welcome Routes
-  get 'sample_elements', to: 'welcome#sample_elements'
   get 'faq', to: 'welcome#faq'
-  get 'terms_and_conditions', to: 'welcome#terms_and_conditions', as: 'terms_and_conditions'
-  get 'privacy_policy', to: 'welcome#privacy_policy', as: 'privacy_policy'
+  get 'terms_and_conditions', to: 'welcome#terms_and_conditions'
+  get 'privacy_policy', to: 'welcome#privacy_policy'
+  get 'blog', to: 'welcome#blog'
 
   # Subscription Routes
   get 'accounts', to: 'subscriptions#accounts', as: 'accounts'
