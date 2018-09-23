@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SpendingAlert</title>
+    <title>Spending Alert</title>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
@@ -36,7 +36,7 @@
               <% else %>
                 <li><a href="/">Why Choose Us?</a></li>
                 <li><a href="/users/sign_up">60 Day Free Trial</a></li>
-                <li><a onclick="scrollToBottom()" href="#">Contact Us</a></li>
+                <!-- <li><a onclick="scrollToBottom()" href="#">Contact Us</a></li> -->
                 <li><a href="/users/sign_up">Sign Up</a></li>
                 <li><a href="/users/sign_in">Log In</a></li>
               <% end %>
@@ -66,21 +66,21 @@
     <footer>
       <section class="footer-links">
         <header class="major">
-          <h3>WHY CHOOSE US</h3>
+          <h3><a href="/index.html">WHY CHOOSE US</a></h3> 
         </header>
         <header class="major">
-          <h3>60 DAY FREE TRIAL</h3>
+          <h3><a href="/users/sign_up.html">60 DAY FREE TRIAL</a></h3> 
         </header>
         <header class="major">
-          <h3>LOG IN</h3>
+          <h3><a href="/users/sign_in.html">LOG IN</a></h3>
         </header>
         <header class="major">
-          <h3>BLOG</h3>
+          <!-- <h3>BLOG</h3> -->
         </header>
       </section>
 
       <p class="copyright">
-        &copy; SpendingAlert is operated by SpendingAlert LLC. All rights reserved.<br> Terms, conditions, features, pricing are subject to change without notice.
+        &copy; SpendingAlert is operated by Spending Alert LLC. All rights reserved.<br> Terms, conditions, features, pricing are subject to change without notice.
       </p>
       <p class="text-center">
         <a class="text-white" href="/terms_and_conditions">Terms of Use</a> | <a class="text-white" href="/privacy_policy">Privacy Policy</a>
