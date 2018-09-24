@@ -13,7 +13,4 @@ class WelcomeController < ApplicationController
 
   def privacy_policy
   end
-
-  def blog
-  end
 end

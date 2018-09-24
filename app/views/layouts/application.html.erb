@@ -66,16 +66,20 @@
     <footer>
       <section class="footer-links">
         <header class="major">
-          <h3><a href="#">WHY CHOOSE US</a></h3> 
+          <h3><a class="no-line" href="#">WHY CHOOSE US</a></h3> 
         </header>
         <header class="major">
-          <h3><a href="/users/sign_up">60 DAY FREE TRIAL</a></h3> 
+          <h3><a class="no-line" href="/users/sign_up">60 DAY FREE TRIAL</a></h3> 
         </header>
         <header class="major">
-          <h3><a href="/users/sign_in">LOG IN</a></h3> 
+          <% if current_user %>
+            <h3><a class="no-line" href="/users/sign_out" data-method="delete">LOG OUT</a></h3>
+          <% else %>
+            <h3><a class="no-line" href="/users/sign_in">LOG IN</a></h3> 
+          <% end %>
         </header>
         <header class="major">
-          <!-- <h3>BLOG</h3> -->
+          <h3><a class="no-line" href="/press">BLOG</a></h3> 
         </header>
       </section>
 
