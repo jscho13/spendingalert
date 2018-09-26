@@ -2,7 +2,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :phone_number, phone: true, :password_complexity
+  validates :phone_number, phone: true
+  validate :password_complexity
 
   attr_accessor :members,
                 :updated_total_spending,
