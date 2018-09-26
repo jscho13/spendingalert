@@ -5,7 +5,8 @@ class User < ApplicationRecord
   validates :phone_number, phone: true
 
   attr_accessor :members,
-                :updated_total_spending
+                :updated_total_spending,
+                :amount_left
 
   def has_guid?
     if self.guid.nil?

@@ -19,6 +19,7 @@ class SubscriptionsController < ApplicationController
 
     @transactions = current_user.get_all_transactions
     @user.updated_total_spending = @transactions.sum(&:amount)
+    @user.amount_left = @user.user_budget - @user.updated_total_spending
   end
 
   def transactions

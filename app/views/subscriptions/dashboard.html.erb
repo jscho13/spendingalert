@@ -24,3 +24,10 @@
     <p><%= number_to_currency(@user.updated_total_spending, precision: 2) %> this month</p>
   </div>
 </div>
+
+<div class="box-container">
+  <div class="box">
+    <h3>Amount Left to Spend/Save</h3>
+    <p class=<%= @user.amount_left > 0 ? '' : 'text-red' %>><%= number_to_currency(@user.amount_left, precision: 2) %></p>
+  </div>
+</div>
