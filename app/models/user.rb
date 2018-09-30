@@ -53,7 +53,9 @@ class User < ApplicationRecord
     from_date = Date.today - Date.today.mday + 1
 
     transactions = ::Atrium::Transaction.list params
-    transactions.select { |i| Date.parse(i.date) >= from_date }
+    transactions.select do |i|
+      Date.parse(i.date) >= from_date && i.category != "Transfer" && i.category != "Credit Card Payment"
+    end
   end
 
   def compose_message
