@@ -71,9 +71,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def get_unnotified_users
-    unnotified_users = []
-    valid_users = []
-    invalid_users = []
+    unnotified_users = valid_users = invalid_users = []
     mx_users = get_all_mx_users
 
     mx_users.map do |u|
