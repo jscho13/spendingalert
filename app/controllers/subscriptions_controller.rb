@@ -29,7 +29,6 @@ class SubscriptionsController < ApplicationController
   def send_messages
     users_to_be_notified = get_unnotified_users
     users_to_be_notified.each do |u|
-      puts "Notifying user id: #{u.id}"
       u.notify_user
     end
 
@@ -74,8 +73,18 @@ class SubscriptionsController < ApplicationController
   def get_unnotified_users
     unnotified_users = []
     mx_users = get_all_mx_users
-    users = mx_users.map { |u| User.find(u.identifier.to_i) }
-    users.each do |u|
+    #TODO Get error handling in here
+    mx_users.map do |u|
+      begin
+        User.find(u.identifier.to_i)
+        valid_users << u
+      rescue
+        invalid_users << u
+      end
+      puts "Valid users: #{valid_users}"
+      puts "Invalid users: #{invalid_users}"
+    end
+    valid_users.each do |u|
       if u.notification_date?
         unnotified_users << u
       end
