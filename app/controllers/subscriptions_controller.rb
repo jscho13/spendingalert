@@ -72,8 +72,10 @@ class SubscriptionsController < ApplicationController
 
   def get_unnotified_users
     unnotified_users = []
+    valid_users = []
+    invalid_users = []
     mx_users = get_all_mx_users
-    #TODO Get error handling in here
+
     mx_users.map do |u|
       begin
         User.find(u.identifier.to_i)
