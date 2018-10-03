@@ -6,13 +6,14 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: "spendingalert.com",
-    port: 465,
+    address: "spendingalert.com.herokudns.com",
+    port: "465",
     domain: ENV["EMAIL_DOMAIN"],
-    authentication: "plain",
+    authentication: :plain,
     enable_starttls_auto: true,
     user_name: ENV["EMAIL_USERNAME"],
-    password: ENV["EMAIL_PASSWORD"]
+    password: ENV["EMAIL_PASSWORD"],
+    tls: true
   }
 
   # In the development environment your application's code is reloaded on
