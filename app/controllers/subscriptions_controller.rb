@@ -31,9 +31,9 @@ class SubscriptionsController < ApplicationController
     users_to_be_notified.each do |u|
       u.notify_user
     end
+    users_json = users_to_be_notified.to_json
 
-    #TODO: Get this better
-    render json: []
+    render json: users_json  
   end
 
   def delete_mx_member
