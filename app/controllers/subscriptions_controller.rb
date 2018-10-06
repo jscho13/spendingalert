@@ -76,14 +76,15 @@ class SubscriptionsController < ApplicationController
 
     mx_users.map do |u|
       begin
-        User.find(u.identifier.to_i)
-        valid_users << u
+        lu = User.find(u.identifier.to_i)
+        valid_users << lu
       rescue
-        invalid_users << u
+        invalid_users << lu
       end
-      puts "Valid users: #{valid_users}"
-      puts "Invalid users: #{invalid_users}"
     end
+    valid_users.compact!
+    puts "Valid users: #{valid_users}"
+    puts "Invalid users: #{invalid_users}"
     valid_users.each do |u|
       if u.notification_date?
         unnotified_users << u
