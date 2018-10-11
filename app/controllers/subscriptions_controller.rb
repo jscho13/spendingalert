@@ -17,9 +17,10 @@ class SubscriptionsController < ApplicationController
     @user.has_guid? #TODO: move this into Devise controller to run once
     @user.members = get_all_memberships
 
-    @transactions = current_user.get_all_transactions
-    @user.updated_total_spending = @transactions.sum(&:amount)
-    @user.amount_left = @user.user_budget - @user.updated_total_spending
+    current_user.update_total_spending
+    @user.total_spending
+    @user.save
+    @user.amount_left = @user.user_budget - @user.total_spending
   end
 
   def transactions
@@ -71,7 +72,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def get_unnotified_users
-    unnotified_users = valid_users = invalid_users = []
+    unnotified_users, valid_users, invalid_users = [], [], []
     mx_users = get_all_mx_users
 
     mx_users.map do |u|
@@ -83,13 +84,14 @@ class SubscriptionsController < ApplicationController
       end
     end
     valid_users.compact!
-    puts "Valid users: #{valid_users}"
-    puts "Invalid users: #{invalid_users}"
+    puts "Valid users: #{valid_users}\n"
+    puts "Invalid users: #{invalid_users}\n"
     valid_users.each do |u|
       if u.notification_date?
         unnotified_users << u
       end
     end
+    puts "Unnotified users: #{unnotified_users}\n"
     unnotified_users 
   end
 
