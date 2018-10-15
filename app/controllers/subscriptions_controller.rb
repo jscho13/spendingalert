@@ -17,9 +17,10 @@ class SubscriptionsController < ApplicationController
     @user.has_guid? #TODO: move this into Devise controller to run once
     @user.members = get_all_memberships
 
-    @transactions = current_user.get_all_transactions
-    @user.updated_total_spending = @transactions.sum(&:amount)
-    @user.amount_left = @user.user_budget - @user.updated_total_spending
+    current_user.update_total_spending
+    @user.total_spending
+    @user.save
+    @user.amount_left = @user.user_budget - @user.total_spending
   end
 
   def transactions
@@ -31,9 +32,9 @@ class SubscriptionsController < ApplicationController
     users_to_be_notified.each do |u|
       u.notify_user
     end
+    users_json = users_to_be_notified.to_json
 
-    #TODO: Get this better
-    render json: []
+    render json: users_json  
   end
 
   def delete_mx_member
@@ -71,24 +72,26 @@ class SubscriptionsController < ApplicationController
   end
 
   def get_unnotified_users
-    unnotified_users = valid_users = invalid_users = []
+    unnotified_users, valid_users, invalid_users = [], [], []
     mx_users = get_all_mx_users
 
     mx_users.map do |u|
       begin
-        User.find(u.identifier.to_i)
-        valid_users << u
+        lu = User.find(u.identifier.to_i)
+        valid_users << lu
       rescue
-        invalid_users << u
+        invalid_users << lu
       end
-      puts "Valid users: #{valid_users}"
-      puts "Invalid users: #{invalid_users}"
     end
+    valid_users.compact!
+    puts "Valid users: #{valid_users}\n"
+    puts "Invalid users: #{invalid_users}\n"
     valid_users.each do |u|
       if u.notification_date?
         unnotified_users << u
       end
     end
+    puts "Unnotified users: #{unnotified_users}\n"
     unnotified_users 
   end
 

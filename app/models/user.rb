@@ -1,12 +1,11 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   validates :phone_number, phone: true
   validate :password_complexity
 
   attr_accessor :members,
-                :updated_total_spending,
                 :amount_left
 
   def has_guid?
@@ -32,6 +31,7 @@ class User < ApplicationRecord
   end
 
   def notification_date?
+    self.update_total_spending
     case self.notification_interval
     when "interval_5_days"
       return check_interval_5_days
@@ -55,6 +55,16 @@ class User < ApplicationRecord
     transactions = ::Atrium::Transaction.list params
     transactions.select do |i|
       Date.parse(i.date) >= from_date && i.category != "Transfer" && i.category != "Credit Card Payment"
+    end
+  end
+
+  def update_total_spending
+    begin
+      transactions = self.get_all_transactions
+      self.total_spending = transactions.sum(&:amount)
+      self.save
+    rescue
+      puts "Invalid guid for User: #{self.id}, #{self.email}"
     end
   end
 
@@ -104,16 +114,13 @@ HEREDOC
   def check_interval_value(field)
     self.alert_sent_flag = false if Date.today.mday == 1
 
-    if !self.alert_sent_flag
-      transactions = self.get_all_transactions
-      self.total_spending = transactions.sum(&:amount)
-
-      if self.total_spending < self[field] 
-        return false
-      else
-        self.alert_sent_flag = true
-        return true
-      end
+    if (self.total_spending > self[field]) && !self.alert_sent_flag
+      self.alert_sent_flag = true
+      self.save
+      return true
+    else
+      self.save
+      return false
     end
   end
 
