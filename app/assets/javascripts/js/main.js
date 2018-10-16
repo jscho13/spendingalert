@@ -169,16 +169,16 @@
 // 					});
 
 				// Hide panel on body click/tap.
-					$body.on('click touchend', function(event) {
-
-						// >large? Bail.
-							if (!skel.breakpoint('large').active)
-								return;
-
-						// Deactivate.
-							$sidebar.addClass('inactive');
-
-					});
+// 					$body.on('click touchend', function(event) {
+// 
+// 						// >large? Bail.
+// 							if (!skel.breakpoint('large').active)
+// 								return;
+// 
+// 						// Deactivate.
+// 							$sidebar.addClass('inactive');
+// 
+// 					});
 
 			// Scroll lock.
 			// Note: If you do anything to change the height of the sidebar's content, be sure to
