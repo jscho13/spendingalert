@@ -8,13 +8,8 @@ class User < ApplicationRecord
   attr_accessor :members,
                 :amount_left
 
-  def has_guid?
-    if self.guid.nil?
-      create_mx_user
-      false
-    else
-      true
-    end
+  def create_guid
+    create_mx_user if self.guid.nil?
   end
 
   def notify_user

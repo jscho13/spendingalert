@@ -14,7 +14,6 @@ class SubscriptionsController < ApplicationController
 
   def dashboard
     @user = current_user
-    @user.has_guid? #TODO: move this into Devise controller to run once
     @user.members = get_all_memberships
 
     current_user.update_total_spending
@@ -46,19 +45,19 @@ class SubscriptionsController < ApplicationController
   def checkout
   end
 
-#   def charge
-#     customer = Stripe::Customer.create({
-#       email: 'jscho13@gmail.com',
-#       source: params[:stripeToken],
-#     })
-# 
-#     subscription = Stripe::Subscription.create({
-#       customer: customer["id"],
-#       items: [{plan: 'plan_D52dfQ7ohJSpzR'}],
-#     })
-# 
-#     render json: subscription
-#   end
+  def charge
+    customer = Stripe::Customer.create({
+      email: 'jscho13@gmail.com',
+      source: params[:stripeToken],
+    })
+
+    subscription = Stripe::Subscription.create({
+      customer: customer["id"],
+      items: [{plan: 'plan_D52dfQ7ohJSpzR'}],
+    })
+
+    render json: subscription
+  end
 
 
 
