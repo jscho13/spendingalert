@@ -8,13 +8,8 @@ class User < ApplicationRecord
   attr_accessor :members,
                 :amount_left
 
-  def has_guid?
-    if self.guid.nil?
-      create_mx_user
-      false
-    else
-      true
-    end
+  def create_guid
+    create_mx_user if self.guid.nil?
   end
 
   def notify_user
@@ -30,21 +25,36 @@ class User < ApplicationRecord
     end
   end
 
+  def hit_budget_limit?
+    reset_alert_sent_flag if Date.today.mday == 1
+    hit_budget_limit = self.total_spending > self['user_budget']
+    alert_not_sent = !self.alert_sent_flag
+
+    if hit_budget_limit && alert_not_sent
+      self.alert_sent_flag = true
+      self.save
+    end
+
+    return hit_budget_limit
+  end
+
+  def reset_alert_sent_flag
+    self.alert_sent_flag = false
+    self.save
+  end
+
   def notification_date?
-    self.update_total_spending
     case self.notification_interval
     when "interval_5_days"
       return check_interval_5_days
     when "interval_weekly"
       return check_interval_weekly
 # This won't work. We need to convert percent into a dollar amount
-#     when "interval_percent"
-#       return check_interval_value("notification_percent")
-    when "interval_limit"
-      return check_interval_value("user_budget")
+#       when "interval_percent"
+#         return check_interval_value("notification_percent")
     else 
       log_stderr("User #{self.id}: has no interval")
-      return false;
+      return false
     end
   end
 
@@ -91,7 +101,6 @@ HEREDOC
   end
 
 
-
   private
 
 
@@ -109,19 +118,6 @@ HEREDOC
   def check_interval_weekly
     today = Date.today
     [7, 14, 21, today.end_of_month.mday].include?(today.mday)
-  end
-
-  def check_interval_value(field)
-    self.alert_sent_flag = false if Date.today.mday == 1
-
-    if (self.total_spending > self[field]) && !self.alert_sent_flag
-      self.alert_sent_flag = true
-      self.save
-      return true
-    else
-      self.save
-      return false
-    end
   end
 
   def notify_email

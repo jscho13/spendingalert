@@ -12,9 +12,12 @@ class SubscriptionsController < ApplicationController
     @user = current_user
   end
 
+  def settings
+    @user = current_user
+  end
+
   def dashboard
     @user = current_user
-    @user.has_guid? #TODO: move this into Devise controller to run once
     @user.members = get_all_memberships
 
     current_user.update_total_spending
@@ -46,21 +49,19 @@ class SubscriptionsController < ApplicationController
   def checkout
   end
 
-#   def charge
-#     customer = Stripe::Customer.create({
-#       email: 'jscho13@gmail.com',
-#       source: params[:stripeToken],
-#     })
-# 
-#     subscription = Stripe::Subscription.create({
-#       customer: customer["id"],
-#       items: [{plan: 'plan_D52dfQ7ohJSpzR'}],
-#     })
-# 
-#     render json: subscription
-#   end
+  def charge
+    customer = Stripe::Customer.create({
+      email: 'jscho13@gmail.com',
+      source: params[:stripeToken],
+    })
 
+    subscription = Stripe::Subscription.create({
+      customer: customer["id"],
+      items: [{plan: 'plan_D52dfQ7ohJSpzR'}],
+    })
 
+    render json: subscription
+  end
 
 
   private
@@ -72,6 +73,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def get_unnotified_users
+    # This section could just be User.all?
     unnotified_users, valid_users, invalid_users = [], [], []
     mx_users = get_all_mx_users
 
@@ -86,12 +88,16 @@ class SubscriptionsController < ApplicationController
     valid_users.compact!
     puts "Valid users: #{valid_users}\n"
     puts "Invalid users: #{invalid_users}\n"
+    # We could just use User.all instad of valid_users?
+
     valid_users.each do |u|
-      if u.notification_date?
+      u.update_total_spending
+      if u.hit_budget_limit? || u.notification_date?
         unnotified_users << u
       end
     end
     puts "Unnotified users: #{unnotified_users}\n"
+
     unnotified_users 
   end
 
