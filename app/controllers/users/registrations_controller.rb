@@ -10,18 +10,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    super
-    #TODO: make sure this works
-    binding.pry
-
-    current_user.create_guid
-    customer = Stripe::Customer.create({
-      email: current_user.email
-    })
-    #TODO: there's no db field for this... so make it work. its a varchar
-    current_user.stripe_customer = customer.id
-  end
+#   def create
+#     super
+#     #TODO: make sure this works
+#     binding.pry
+# 
+#     current_user.create_guid
+#     customer = Stripe::Customer.create({
+#       email: current_user.email
+#     })
+#     #TODO: there's no db field for this... so make it work. its a varchar
+#     current_user.stripe_customer = customer.id
+#   end
 
   # GET /resource/edit
   # def edit

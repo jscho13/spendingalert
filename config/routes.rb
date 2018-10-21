@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'subscriptions#dashboard', as: 'dashboard'
   get 'transactions', to: 'subscriptions#transactions'
   get 'checkout', to: 'subscriptions#checkout'
+  get 'settings', to: 'subscriptions#settings', as: 'settings'
 
   # Subscription Action Routes
   delete 'delete_mx_member', to: 'subscriptions#delete_mx_member'

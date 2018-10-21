@@ -7,18 +7,6 @@
       $<%= f.number_field :user_budget, placeholder: 'Enter Limit', class: 'preferences-input budget-input' %>
       </br></br>
 
-      <h3>Alert Schedule</h3>
-      <%= f.select(:notification_interval, options_for_select([['Every 5 Days (recommended)','interval_5_days'],['Weekly (7th, 14th, 21st, Last Day of Month)', 'interval_weekly'],['Only When I Hit My Budget', 'interval_limit']], @user.notification_interval)) %>
-      </br></br>
-
-      <div id="notification_percent">
-        <%= f.number_field :notification_percent, placeholder: 'Enter % Limit', class: 'preferences-input' %>%
-        </br></br>
-      </div>
-
-<!--      <%= f.select(:notification_type, options_for_select([['Email', 'email'],['Text', 'text'], ['Text and Email', 'email_text']], @user.notification_type)) %>
--->
-
       <%= f.submit "Submit" %>
     <% end %>
   </div>
