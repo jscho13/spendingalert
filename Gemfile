@@ -10,14 +10,12 @@ gem 'twilio-ruby'
 gem 'atrium-ruby'
 gem 'stripe'
 gem 'phonelib'
+gem 'rubyzip', ">= 1.2.2"
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'mini_racer', platforms: :ruby
 gem 'turbolinks', '~> 5'
 
 # Reduces boot times through caching; required in config/boot.rb
