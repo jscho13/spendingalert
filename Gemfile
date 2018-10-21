@@ -10,7 +10,6 @@ gem 'twilio-ruby'
 gem 'atrium-ruby'
 gem 'stripe'
 gem 'phonelib'
-gem 'rubyzip', ">= 1.2.2"
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
