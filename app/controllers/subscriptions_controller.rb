@@ -20,6 +20,11 @@ class SubscriptionsController < ApplicationController
     @user = current_user
     @user.members = get_all_memberships
 
+    #TODO: this is temporary. delete this after testing. it's already covered in devise
+    @user.create_mx_guid
+    @user.create_stripe_id
+
+    #TODO: can this be @user?
     current_user.update_total_spending
     @user.total_spending
     @user.save

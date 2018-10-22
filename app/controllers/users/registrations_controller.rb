@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  include Devise::Controllers::Helpers
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -10,18 +11,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-#   def create
-#     super
-#     #TODO: make sure this works
-#     binding.pry
-# 
-#     current_user.create_guid
-#     customer = Stripe::Customer.create({
-#       email: current_user.email
-#     })
-#     #TODO: there's no db field for this... so make it work. its a varchar
-#     current_user.stripe_customer = customer.id
-#   end
+  # def create
+  #   super
+  # end
+
+  def create
+    super
+    resource.create_mx_guid
+    resource.create_stripe_id
+  end
 
   # GET /resource/edit
   # def edit

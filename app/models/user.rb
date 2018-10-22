@@ -8,8 +8,35 @@ class User < ApplicationRecord
   attr_accessor :members,
                 :amount_left
 
-  def create_guid
-    create_mx_user if self.guid.nil?
+  def create_mx_guid
+    if self.guid.nil?
+      begin
+        user = ::Atrium::User.create identifier: "#{self.id}", is_disabled: "", metadata: "{\"email\": \"#{self.email}\"}"
+        self.update_attribute(:guid, user.guid)
+      rescue
+        users = ::Atrium::User.list
+        users.each do |user|
+          if self.id == user.identifier.to_i
+            u = User.find(self.id)
+            u.update_attribute(:guid, user.guid)
+          end
+        end
+        logger.debug "Updated User #{self.id} with guid #{self.guid}"
+      end
+    end
+  end
+
+  def create_stripe_id
+    if self.stripe_customer_id.nil?
+      begin
+        customer = Stripe::Customer.create({
+          email: self.email
+        })
+        self.update_attribute(:stripe_customer_id, customer.id)
+      rescue
+        logger.debug "Unable to create stripe_customer_id for User ID: #{self.id}"
+      end
+    end
   end
 
   def notify_user
@@ -132,22 +159,6 @@ HEREDOC
   def notify_email_text
     notify_email
     notify_text
-  end
-
-  def create_mx_user
-    begin
-      user = ::Atrium::User.create identifier: "#{self.id}", is_disabled: "", metadata: "{\"email\": \"#{self.email}\"}"
-      self.update_attribute(:guid, user.guid)
-    rescue
-      users = ::Atrium::User.list
-      users.each do |user|
-        if self.id == user.identifier.to_i
-          u = User.find(self.id)
-          u.update_attribute(:guid, user.guid)
-        end
-      end
-      logger.debug "Updated User #{self.id} with guid #{self.guid}"
-    end
   end
 
 end
