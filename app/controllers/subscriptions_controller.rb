@@ -59,13 +59,21 @@ class SubscriptionsController < ApplicationController
     # Get the payment token ID submitted by the form:
     token = params[:stripeToken]
 
-    cu = Stripe::Customer.retrieve(current_user.customer_id)
+    cu = Stripe::Customer.retrieve(current_user.stripe_customer_id)
     cu.source = token
     cu.save
+
+  if !Rails.env.production?
     subscription = Stripe::Subscription.create({
-      customer: currrent_user.customer_id,
-      items: [{plan: 'plan_D52dfQ7ohJSpzR'}]
+      customer: current_user.stripe_customer_id,
+      items: [{plan: ENV['STRIPE_TEST_PLAN_ID']}]
     })
+  else
+    subscription = Stripe::Subscription.create({
+      customer: current_user.stripe_customer_id,
+      items: [{plan: ENV['STRIPE_PLAN_ID']}]
+    })
+  end
 
     flash.notice = "Thanks for subscribing. We've saved your payment details."
     redirect_to dashboard_path
