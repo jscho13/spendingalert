@@ -55,17 +55,28 @@ class SubscriptionsController < ApplicationController
   end
 
   def charge
-    customer = Stripe::Customer.create({
-      email: 'jscho13@gmail.com',
-      source: params[:stripeToken],
-    })
+    # Token is created using Checkout or Elements!
+    # Get the payment token ID submitted by the form:
+    token = params[:stripeToken]
 
+    cu = Stripe::Customer.retrieve(current_user.stripe_customer_id)
+    cu.source = token
+    cu.save
+
+  if !Rails.env.production?
     subscription = Stripe::Subscription.create({
-      customer: customer["id"],
-      items: [{plan: 'plan_D52dfQ7ohJSpzR'}],
+      customer: current_user.stripe_customer_id,
+      items: [{plan: ENV['STRIPE_TEST_PLAN_ID']}]
     })
+  else
+    subscription = Stripe::Subscription.create({
+      customer: current_user.stripe_customer_id,
+      items: [{plan: ENV['STRIPE_PLAN_ID']}]
+    })
+  end
 
-    render json: subscription
+    flash.notice = "Thanks for subscribing. We've saved your payment details."
+    redirect_to dashboard_path
   end
 
 
