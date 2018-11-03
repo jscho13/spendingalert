@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_22_010856) do
+ActiveRecord::Schema.define(version: 2018_11_03_181553) do
 
   create_table "subscription_plans", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "amount"
@@ -35,14 +35,14 @@ ActiveRecord::Schema.define(version: 2018_10_22_010856) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_budget"
+    t.bigint "user_budget", default: 0
     t.bigint "phone_number", null: false
     t.string "guid"
     t.string "notification_interval"
     t.string "notification_type", default: "text"
     t.boolean "alert_sent_flag", default: false
     t.integer "notification_percent", limit: 2
-    t.bigint "total_spending"
+    t.bigint "total_spending", default: 0
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
