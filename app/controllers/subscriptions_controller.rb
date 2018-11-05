@@ -35,6 +35,14 @@ class SubscriptionsController < ApplicationController
     @transactions = current_user.get_all_transactions
   end
 
+  def send_message
+    u = User.find(params[:id])
+    u.notify_user
+    user_json = u.to_json
+
+    render json: user_json
+  end
+
   def send_messages
     users_to_be_notified = get_unnotified_users
     users_to_be_notified.each do |u|
@@ -89,24 +97,10 @@ class SubscriptionsController < ApplicationController
   end
 
   def get_unnotified_users
-    # This section could just be User.all?
-    unnotified_users, valid_users, invalid_users = [], [], []
-    mx_users = get_all_mx_users
+    unnotified_users = []
+    all_users = User.all
 
-    mx_users.map do |u|
-      begin
-        lu = User.find(u.identifier.to_i)
-        valid_users << lu
-      rescue
-        invalid_users << lu
-      end
-    end
-    valid_users.compact!
-    puts "Valid users: #{valid_users}\n"
-    puts "Invalid users: #{invalid_users}\n"
-    # We could just use User.all instad of valid_users?
-
-    valid_users.each do |u|
+    all_users.each do |u|
       u.update_total_spending
       if u.hit_budget_limit? || u.notification_date?
         unnotified_users << u

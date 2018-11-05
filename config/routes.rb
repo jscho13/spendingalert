@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   # Subscription Action Routes
   delete 'delete_mx_member', to: 'subscriptions#delete_mx_member'
   post 'charge', to: 'subscriptions#charge'
-  get 'send_message', to: 'subscriptions#send_message', as: 'send_message'
+  get 'send_message/:id', to: 'subscriptions#send_message', as: 'send_message'
   get 'send_messages', to: 'subscriptions#send_messages', as: 'send_messages'
 
   # Press Routes
