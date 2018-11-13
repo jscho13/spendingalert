@@ -17,12 +17,12 @@ class SubscriptionsController < ApplicationController
   end
 
   def dashboard
-    @user = current_user
-    @user.members = get_all_memberships
-
     #TODO: this is temporary. delete this after testing. it's already covered in devise
     @user.create_mx_guid
     @user.create_stripe_id
+
+    @user = current_user
+    @user.members = get_all_memberships
 
     @user.update_total_spending
     @user.save
