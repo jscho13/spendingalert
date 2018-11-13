@@ -20,7 +20,7 @@ module Atrium
     end
 
     def http_client
-      @http_client ||= ::HTTPClient.new('http://fixie:BV9DRjXdoRWWXGx@velodrome.usefixie.com:80')
+      @http_client ||= ::HTTPClient.new(ENV['FIXIE_URL'])
     end
 
   private
