@@ -58,7 +58,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "spendinglaert_#{Rails.env}"
 
   # Settings specified here will take precedence over those in config/application.rb.
-  config.action_mailer.default_url_options = { host: 'spendingalert.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'spendingalert.com' }
   config.action_mailer.perform_caching = false
   ActionMailer::Base.smtp_settings = {
     :user_name => ENV['SENDGRID_USERNAME'],
