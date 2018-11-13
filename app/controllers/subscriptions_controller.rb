@@ -24,9 +24,7 @@ class SubscriptionsController < ApplicationController
     @user.create_mx_guid
     @user.create_stripe_id
 
-    #TODO: make this cleaner. it's saving directly to DB first, and then updating instance variable
-    current_user.update_total_spending
-    @user.total_spending
+    @user.update_total_spending
     @user.save
     @user.amount_left = @user.user_budget - @user.total_spending
   end
