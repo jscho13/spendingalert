@@ -79,6 +79,8 @@ class User < ApplicationRecord
 # This won't work. We need to convert percent into a dollar amount
 #       when "interval_percent"
 #         return check_interval_value("notification_percent")
+    when "interval_daily"
+      return true
     else 
       log_stderr("User #{self.id}: has no interval")
       return false
