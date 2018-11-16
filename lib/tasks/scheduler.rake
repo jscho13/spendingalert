@@ -9,7 +9,7 @@ task send_daily_alerts: :environment do
   puts "Signing in"
   app.get '/users/sign_in'
   p csrf_token = app.session[:_csrf_token]
-  app.post '/users/sign_in',{:authenticity_token => csrf_token, :user => {:email => ENV['SA_EMAIL'], :password => ENV['SA_PASSWORD'] }}
+  app.post('/users/sign_in', { params: { authenticity_token: csrf_token, user: {email: ENV['SA_EMAIL'], password: ENV['SA_PASSWORD'] }}})
 
   puts "Succesfully logged in"
   app.get ''
