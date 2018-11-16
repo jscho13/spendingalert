@@ -97,6 +97,7 @@ class SubscriptionsController < ApplicationController
   def get_unnotified_users
     unnotified_users = []
     all_users = User.all
+    all_user.select { |u| !u.nil? && !u.notification_interval.nil? }
 
     all_users.each do |u|
       u.update_total_spending
