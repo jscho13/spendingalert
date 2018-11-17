@@ -19,10 +19,11 @@ task send_daily_alerts: :environment do
 
   puts "Hitting /dashboard"
   app.get "/dashboard"
+  puts app.response.body
 
   puts "Hitting /send_messages"
   app.get "/send_messages"
-
   puts app.response.body
+
   puts "Done!"
 end
