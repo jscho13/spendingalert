@@ -7,10 +7,17 @@ class TwilioTextMessenger
 
   def call(phone_number)
     client = Twilio::REST::Client.new
-    client.messages.create({
-      from: ENV['TWILIO_PHONE_NUMBER'],
-      to: "#{phone_number}",
-      body: message
-    })
+    if !Rails.env.production?
+      client.messages.create({
+        from: ENV['TWILIO_PHONE_NUMBER'],
+        to: "#{phone_number}",
+        body: message
+      })
+    else
+      client.messages.create({
+        from: ENV['TWILIO_DEVELOPMENT_PHONE_NUMBER'],
+        to: "#{phone_number}",
+        body: message
+      })
   end
 end

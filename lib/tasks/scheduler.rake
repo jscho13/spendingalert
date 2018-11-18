@@ -1,5 +1,5 @@
-desc "Send daily alert"
-task send_daily_alerts: :environment do
+desc "Send messages"
+task send_messages: :environment do
   puts "Starting daily alert task"
   include Rails.application.routes.url_helpers
 
