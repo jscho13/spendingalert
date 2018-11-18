@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'faq', to: 'welcome#faq'
   get 'terms_and_conditions', to: 'welcome#terms_and_conditions'
   get 'privacy_policy', to: 'welcome#privacy_policy'
+  get 'send_messages', to: 'welcome#send_messages'
 
   # Subscription Views
   get 'accounts', to: 'subscriptions#accounts', as: 'accounts'
@@ -21,7 +22,6 @@ Rails.application.routes.draw do
   delete 'delete_mx_member', to: 'subscriptions#delete_mx_member'
   post 'charge', to: 'subscriptions#charge'
   get 'send_message/:id', to: 'subscriptions#send_message', as: 'send_message'
-  get 'send_messages', to: 'subscriptions#send_messages', as: 'send_messages'
 
   # Press Routes
   get 'blog', to: 'press#blog'
