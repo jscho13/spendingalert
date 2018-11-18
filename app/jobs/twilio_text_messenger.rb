@@ -19,5 +19,6 @@ class TwilioTextMessenger
         to: "#{phone_number}",
         body: message
       })
+    end
   end
 end
