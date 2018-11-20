@@ -15,6 +15,8 @@ class WelcomeController < ApplicationController
   end
 
   def send_messages
+    puts "Inside send_messages"
+
     users_to_be_notified = get_unnotified_users
     users_to_be_notified.each do |u|
       u.notify_user
@@ -27,6 +29,7 @@ class WelcomeController < ApplicationController
   private
 
   def get_unnotified_users
+    puts "Inside get_unnotified_users"
     unnotified_users = []
     all_users = User.all
     all_users.select { |u| !u.guid.nil? && !u.notification_interval.nil? }

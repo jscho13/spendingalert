@@ -99,6 +99,7 @@ class User < ApplicationRecord
 
   def update_total_spending
     begin
+      puts "Inside update_total_spending"
       transactions = self.get_all_transactions
       self.total_spending = transactions.sum(&:amount)
       self.save
