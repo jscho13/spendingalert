@@ -6,6 +6,7 @@ task send_messages: :environment do
   puts "Creating Rails sesssion"
   app = ActionDispatch::Integration::Session.new(Rails.application)
 
+  p ENV
   puts "Hitting /send_messages"
   app.get "/send_messages"
 
