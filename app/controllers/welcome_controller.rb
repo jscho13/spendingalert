@@ -1,6 +1,4 @@
 class WelcomeController < ApplicationController
-  protect_from_forgery with: :exception
-
   def index
   end
 
@@ -24,8 +22,9 @@ class WelcomeController < ApplicationController
       u.notify_user
     end
     users_json = users_to_be_notified.to_json
+    puts users_json
 
-    render json: users_json
+    redirect_to action: "index"
   end
 
   private
