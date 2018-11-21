@@ -20,10 +20,12 @@ task send_messages2: :environment do
 
   puts "Creating Rails sesssion"
   app = ActionDispatch::Integration::Session.new(Rails.application)
+  p app
 
   p ENV
   puts "Hitting /send_messages2"
   app.get "/send_messages2"
+  p app.response.body
 
   puts "Done!"
 end
