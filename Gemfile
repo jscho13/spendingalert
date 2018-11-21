@@ -7,10 +7,9 @@ gem 'rails', '~> 5.2.0'
 gem 'mysql2'
 gem 'devise'
 gem 'twilio-ruby'
-gem 'atrium-ruby', path: "./lib/assets/atrium-ruby-1.3.0"
+# gem 'atrium-ruby', path: "./lib/assets/atrium-ruby-1.3.0"
 gem 'stripe'
 gem 'phonelib'
-gem 'foreman'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
