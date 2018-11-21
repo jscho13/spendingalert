@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'terms_and_conditions', to: 'welcome#terms_and_conditions'
   get 'privacy_policy', to: 'welcome#privacy_policy'
   get '/send_messages', to: 'welcome#send_messages'
+  get '/send_messages2', to: 'welcome#send_messages2'
 
   # Subscription Views
   get 'accounts', to: 'subscriptions#accounts', as: 'accounts'

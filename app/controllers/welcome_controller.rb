@@ -27,6 +27,17 @@ class WelcomeController < ApplicationController
     redirect_to action: "index"
   end
 
+  def send_messages2
+    puts "Inside send_messages"
+
+    users_to_be_notified = User.all
+    users_to_be_notified.select { |u| !u.guid.nil? && !u.notification_interval.nil? }
+    users_json = users_to_be_notified.to_json
+    puts users_json
+
+    redirect_to action: "index"
+  end
+
   private
 
   def get_unnotified_users
