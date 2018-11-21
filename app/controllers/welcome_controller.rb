@@ -1,4 +1,6 @@
 class WelcomeController < ApplicationController
+  protect_from_forgery with: :exception
+
   def index
   end
 
@@ -28,12 +30,10 @@ class WelcomeController < ApplicationController
   end
 
   def send_messages2
-    puts "Inside send_messages"
+    puts "Inside send_messages2"
 
     users_to_be_notified = User.all
-    users_to_be_notified.select { |u| !u.guid.nil? && !u.notification_interval.nil? }
-    users_json = users_to_be_notified.to_json
-    puts users_json
+    puts users_to_be_notified.to_json
 
     redirect_to action: "index"
   end
