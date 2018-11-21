@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
   resources :users
 #  resources :subscriptions
-  root to: 'welcome#index'
+  root 'welcome#index'
 
   # Welcome Routes
   get 'faq', to: 'welcome#faq'

@@ -22,18 +22,17 @@ class WelcomeController < ApplicationController
       u.notify_user
     end
     users_json = users_to_be_notified.to_json
-    puts users_json
 
-    redirect_to action: "index"
+    render json: users_json
   end
 
   def send_messages2
     puts "Inside send_messages2"
 
     users_to_be_notified = User.all
-    puts users_to_be_notified.to_json
+    users_json = users_to_be_notified.to_json
 
-    redirect_to action: "index"
+    render json: users_json
   end
 
   private
