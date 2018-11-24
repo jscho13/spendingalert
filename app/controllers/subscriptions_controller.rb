@@ -24,13 +24,9 @@ class SubscriptionsController < ApplicationController
     @user.create_stripe_id
 
     @user.members = get_all_memberships
-    @user.update_total_spending
+    @user.update_total_spending(@user.members)
     @user.save
     @user.amount_left = @user.user_budget - @user.total_spending
-  end
-
-  def transactions
-    @transactions = current_user.get_all_transactions
   end
 
   def send_message

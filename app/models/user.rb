@@ -97,9 +97,16 @@ class User < ApplicationRecord
     end
   end
 
-  def update_total_spending
+  def update_total_spending(members)
     begin
-      puts "Inside update_total_spending"
+      members.each do |a_member|
+        member = ::Atrium::Member.read user_guid: self.guid, member_guid: "#{a_member.guid}"
+        member = member.aggregate
+        puts "User: #{self.id}\n"
+        puts "Last successfully aggregated: #{member.successfully_aggregated_at}\n"
+        puts member.attributes
+      end
+
       transactions = self.get_all_transactions
       self.total_spending = transactions.sum(&:amount)
       self.save
