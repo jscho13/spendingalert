@@ -151,12 +151,12 @@ HEREDOC
 
   def check_interval_5_days
     today = Date.today
-    [5, 10, 15, 20, 25, today.end_of_month.mday].include?(today.mday)
+    [5, 10, 15, 20, 25, 30, today.end_of_month.mday].uniq.include?(today.mday)
   end
 
   def check_interval_weekly
     today = Date.today
-    [7, 14, 21, today.end_of_month.mday].include?(today.mday)
+    [7, 14, 21, 28, today.end_of_month.mday].uniq.include?(today.mday)
   end
 
   def notify_email
