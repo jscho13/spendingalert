@@ -3,7 +3,7 @@ class SubscriptionsController < ApplicationController
 
   def accounts
     @user = current_user
-    @user.members = get_all_memberships
+    @user.members = @user.get_all_memberships
 
     get_connect_widget
   end
@@ -23,7 +23,7 @@ class SubscriptionsController < ApplicationController
     @user.create_mx_guid
     @user.create_stripe_id
 
-    @user.members = get_all_memberships
+    @user.members = @user.get_all_memberships
     @user.update_total_spending(@user.members)
     @user.save
     @user.amount_left = @user.user_budget - @user.total_spending
@@ -86,10 +86,6 @@ class SubscriptionsController < ApplicationController
 
   def get_connect_widget
     @widget = ::Atrium::Connect.create user_guid: "#{current_user.guid}"
-  end
-
-  def get_all_memberships
-    ::Atrium::Member.list user_guid: "#{current_user.guid}"
   end
 
   def get_all_mx_users

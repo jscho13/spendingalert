@@ -32,7 +32,8 @@ class WelcomeController < ApplicationController
     all_users = User.all.select { |u| !u.guid.nil? && !u.notification_interval.nil? }
 
     all_users.each do |u|
-      u.update_total_spending
+      members = u.get_all_memberships
+      u.update_total_spending(members)
       if u.hit_budget_limit? || u.notification_date?
         unnotified_users << u
       end
