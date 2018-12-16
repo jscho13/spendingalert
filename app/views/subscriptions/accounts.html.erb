@@ -1,13 +1,28 @@
 <h3>Connect More Accounts</h3>
 <div id='addAccount'></div>
 
+<h3>Unresolved Accounts</h3>
+<p>Any accounts that appear here we've had issues validating. Please try again later. If the issue persists please contact us directly via phone.</p>
+<ul>
+  <% @user.members.each do |name| %>
+    <% if ['CHALLENGED', 'EXPIRED'].any? {|x| x == name.status} %>
+      <div class="remove-account__item" >
+        <%= button_to 'x', {controller: "subscriptions", action: "delete_mx_member", member_guid: name.guid}, method: :delete %>
+        <li><%= name.name %></li>
+      </div>
+    <% end %>
+  <% end %>
+</ul>
+
 <h3>Remove Accounts</h3>
 <ul>
   <% @user.members.each do |name| %>
-    <div class="remove-account__item" >
-      <%= button_to 'x', {controller: "subscriptions", action: "delete_mx_member", member_guid: name.guid}, method: :delete %>
-      <li><%= name.name %></li>
-    </div>
+    <% if name.status == 'CONNECTED' %>
+      <div class="remove-account__item" >
+        <%= button_to 'x', {controller: "subscriptions", action: "delete_mx_member", member_guid: name.guid}, method: :delete %>
+        <li><%= name.name %></li>
+      </div>
+    <% end %>
   <% end %>
 </ul>
 
@@ -23,7 +38,8 @@
       onSuccess: function (memberGuid) {
         // Member created successfully
         console.log('On Success');
-      }
+      },
+      height: '450px'
     });
 
     mxConnect.load();
