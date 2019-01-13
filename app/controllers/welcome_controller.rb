@@ -34,7 +34,7 @@ class WelcomeController < ApplicationController
     all_users.each do |u|
       members = u.get_all_memberships
       u.update_total_spending(members)
-      if u.hit_budget_limit? || u.notification_date?
+      if u.notification_date? && (u.alert_sent_flag == false)
         unnotified_users << u
       end
     end

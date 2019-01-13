@@ -52,19 +52,6 @@ class User < ApplicationRecord
     end
   end
 
-  def hit_budget_limit?
-    reset_alert_sent_flag if Date.today.mday == 1
-    hit_budget_limit = self.total_spending > self['user_budget']
-    alert_not_sent = !self.alert_sent_flag
-
-    if hit_budget_limit && alert_not_sent
-      self.alert_sent_flag = true
-      self.save
-    end
-
-    return hit_budget_limit
-  end
-
   def reset_alert_sent_flag
     self.alert_sent_flag = false
     self.save
@@ -107,8 +94,15 @@ class User < ApplicationRecord
         puts member.attributes
       end
 
+      # update total_spending
       transactions = self.get_all_transactions
       self.total_spending = transactions.sum(&:amount)
+
+      # update alert_sent_flag
+      budget_limit_bool = self.total_spending > self['user_budget']
+      reset_alert_sent_flag if Date.today.mday == 1
+      self.alert_sent_flag = true if budget_limit_bool
+
       self.save
     rescue
       puts "Invalid guid for User: #{self.id}, #{self.email}"
