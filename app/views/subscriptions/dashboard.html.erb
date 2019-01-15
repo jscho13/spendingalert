@@ -2,7 +2,7 @@
   <div class="box">
     <h3>Spending Limit</h3>
     <p><%= number_to_currency(@user.user_budget, precision: 2) %> per month</p>
-    <h5><a href="/budget">change limit/alerts</a></h5>
+    <h5><a href="/budget">change spending limit</a></h5>
   </div>
 </div>
 
@@ -15,7 +15,7 @@
 
 <div class="box-container">
   <div class="box">
-    <h3>Amount Left to Spend/Save</h3>
+    <h3>Amount Left to Spend or Save!</h3>
     <p class=<%= @user.amount_left > 0 ? '' : 'text-red' %>><%= number_to_currency(@user.amount_left, precision: 2) %></p>
   </div>
 </div>
