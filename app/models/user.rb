@@ -76,11 +76,11 @@ class User < ApplicationRecord
 
   def get_all_transactions
     params = { user_guid: self.guid }
-    from_date = Date.today - Date.today.mday + 1
+    start_date = Date.today.mday + 1
 
     transactions = ::Atrium::Transaction.list params
     transactions.select do |i|
-      Date.parse(i.date) >= from_date && i.category != "Transfer" && i.category != "Credit Card Payment"
+      Date.parse(i.date) >= start_date && i.category != "Transfer" && i.category != "Credit Card Payment"
     end
   end
 
