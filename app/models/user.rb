@@ -75,26 +75,16 @@ class User < ApplicationRecord
   end
 
   def get_all_transactions
-    client = Atrium::AtriumClient.new(ENV['MX_API_KEY'], ENV['MX_CLIENT_ID'])
-    now = Date.today
-
-    user_guid = self.guid # String | The unique identifier for a `user`.
-    opts = {
-      # page: 1, # Integer | Specify current page.
-      from_date: Date.new(now.year, now.month, 1), # String | Filter transactions from this date.
-      # records_per_page: 1000, # Integer | Specify records per page.
+    params = {
+      from_date: Date.new(Date.today.year, Date.today.month, 1), # String | Filter transactions from this date.
       to_date: Date.today # String | Filter transactions to this date.
     }
 
-    begin
-      #List transactions for a user
-      filtered_transacts = client.transactions.list_user_transactions(user_guid, opts)
-      filtered_transacts.select do |t|
+    ::Atrium::Transaction.list_each(:user_guid => self.guid, :query_params => params) do |transaction|
+      transaction.select do |t|
         t.category != "Transfer" && t.category != "Credit Card Payment"
       end
-      filtered_transacts
-    rescue Atrium::ApiError => e
-      puts "Exception when calling TransactionsApi->list_user_transactions: #{e}"
+      transaction
     end
   end
 
