@@ -80,12 +80,11 @@ class User < ApplicationRecord
       to_date: Date.today # String | Filter transactions to this date.
     }
 
-    ::Atrium::Transaction.list_each(:user_guid => self.guid, :query_params => params) do |transaction|
-      transaction.select do |t|
-        t.category != "Transfer" && t.category != "Credit Card Payment"
-      end
-      transaction
+    transactions = ::Atrium::Transaction.list_each(:user_guid => self.guid, :query_params => params) do |transaction|
+      transaction.category != "Transfer" && transaction.category != "Credit Card Payment"
     end
+
+    transactions 
   end
 
   def update_total_spending(members)
