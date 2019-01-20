@@ -17,7 +17,7 @@
 <h3>Remove Accounts</h3>
 <ul>
   <% @user.members.each do |name| %>
-    <% if name.status == 'CONNECTED' %>
+    <% if name.status == 'COMPLETED' %>
       <div class="remove-account__item" >
         <%= button_to 'x', {controller: "subscriptions", action: "delete_mx_member", member_guid: name.guid}, method: :delete %>
         <li><%= name.name %></li>
@@ -31,7 +31,7 @@
   function loadMxWidget() {
     var mxConnect = new MXConnect({
       id: 'addAccount',
-      url: '<%= @widget.attributes["connect_widget_url"] %>',
+      url: '<%= @widget.user.connect_widget_url %>',
       onLoad: function () {
         // Add accounts widget successfully loaded
         console.log('On Load');

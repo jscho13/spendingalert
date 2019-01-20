@@ -85,15 +85,34 @@ class SubscriptionsController < ApplicationController
   end
 
   def get_connect_widget
-    @widget = ::Atrium::Connect.create user_guid: "#{current_user.guid}"
+    user_guid = current_user.guid # String | The unique identifier for a `user`.
+    body = Atrium::ConnectWidgetRequestBody.new # ConnectWidgetRequestBody | Optional config options for WebView (is_mobile_webview, current_institution_code, current_member_guid, update_credentials)
+
+    begin
+      #Embedding in a website
+      @widget = GlobalAtrium.connectWidget.get_connect_widget(user_guid, body)
+    rescue Atrium::ApiError => e
+      puts "Exception when calling ConnectWidgetApi->get_connect_widget: #{e}"
+    end
   end
 
   def get_all_mx_users
-    ::Atrium::User.list
+    opts = {
+      page: 1, # Integer | Specify current page.
+      records_per_page: 50, # Integer | Specify records per page.
+    }
+
+    begin
+      #List users
+      response = GlobalAtrium.users.list_users(opts)
+    rescue Atrium::ApiError => e
+      puts "Exception when calling UsersApi->list_users: #{e}"
+    end
+    response.users 
   end
 
   def get_mx_member(member_guid)
-    ::Atrium::Member.read user_guid: "#{current_user.guid}", member_guid: "#{member_guid}"
+    GlobalAtrium.members.read_member(member_guid, current_user.guid)
   end
 
 end

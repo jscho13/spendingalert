@@ -11,19 +11,36 @@ class User < ApplicationRecord
   def create_mx_guid
     if self.guid.nil?
       begin
-        user = ::Atrium::User.create identifier: "#{self.id}", is_disabled: "", metadata: "{\"email\": \"#{self.email}\"}"
+        # UserCreateRequestBody | User object to be created with optional parameters (identifier, is_disabled, metadata)
+        opts = {
+          user: {
+            identifier: self.id,
+            is_disabled: "",
+            metadata: "{\"email\": \"#{self.email}\"}"
+          }
+        }
+        body = Atrium::UserCreateRequestBody.new(opts)
+
+        # Create user
+        user = GlobalAtrium.users.create_user(body).user
         self.update_attribute(:guid, user.guid)
-      rescue
-        users = ::Atrium::User.list
-        users.each do |user|
-          if self.id == user.identifier.to_i
-            u = User.find(self.id)
-            u.update_attribute(:guid, user.guid)
-          end
-        end
-        logger.debug "Updated User #{self.id} with guid #{self.guid}"
+      rescue Atrium::ApiError => e
+        puts "Exception when calling UsersApi->create_user: #{e}"
       end
     end
+  end
+
+  def update_mx_guid
+    # Updates user with MxID if they don't have one. Currently not used.
+    # This function needs to be updated
+    users = ::Atrium::User.list
+    users.each do |user|
+      if self.id == user.identifier.to_i
+        u = User.find(self.id)
+        u.update_attribute(:guid, user.guid)
+      end
+    end
+    logger.debug "Updated User #{self.id} with guid #{self.guid}"
   end
 
   def create_stripe_id
@@ -75,29 +92,35 @@ class User < ApplicationRecord
   end
 
   def get_all_transactions
-    params = {
-      user_guid: self.guid,
+    opts = {
       from_date: Date.new(Date.today.year, Date.today.month, 1), # String | Filter transactions from this date.
-      to_date: Date.today # String | Filter transactions to this date.
+      to_date: Date.today, # String | Filter transactions to this date.
+      records_per_page: 1000
     }
 
-    transactions = ::Atrium::Transaction.list(params).each do |transaction|
-      transaction.category != "Transfer" && transaction.category != "Credit Card Payment"
+    begin
+      #List transactions for a user
+      transactions = GlobalAtrium.transactions.list_user_transactions(self.guid, opts).transactions
+      transactions.select! do |t|
+        t.category != "Transfer" && t.category != "Credit Card Payment"
+      end
+    rescue Atrium::ApiError => e
+      puts "Exception when calling TransactionsApi->list_user_transactions: #{e}"
     end
-
-    binding.pry
 
     transactions 
   end
 
   def update_total_spending(members)
     begin
-      members.each do |a_member|
-        member = ::Atrium::Member.read user_guid: self.guid, member_guid: "#{a_member.guid}"
-        member = member.aggregate
-        puts "User: #{self.id}\n"
-        puts "Last successfully aggregated: #{member.successfully_aggregated_at}\n"
-        puts member.attributes
+      members.each do |m|
+        # Read member
+        # member = GlobalAtrium.members.read_member(a_member.guid, self.guid)
+
+        # Aggregate member
+        member = GlobalAtrium.members.aggregate_member(m.guid, self.guid).member
+        puts "User: #{self.id} was last successfully aggregated at #{member.successfully_aggregated_at}\n"
+        puts member.to_s
       end
 
       # update total_spending
@@ -111,7 +134,7 @@ class User < ApplicationRecord
 
       self.save
     rescue
-      puts "Invalid guid for User: #{self.id}, #{self.email}"
+      puts "Error for User: #{self.id}, #{self.email}, when trying `update_total_spending`"
     end
   end
 
@@ -138,7 +161,19 @@ HEREDOC
   end
 
   def get_all_memberships
-    ::Atrium::Member.list user_guid: "#{self.guid}"
+    begin
+      opts = {
+        page: 1, # Integer | Specify current page.
+        records_per_page: 50, # Integer | Specify records per page.
+      }
+
+      #List members
+      members = GlobalAtrium.members.list_members(self.guid, opts)
+    rescue Atrium::ApiError => e
+      puts "Exception when calling MembersApi->list_members: #{e}"
+    end
+
+    members.members
   end
 
   private
