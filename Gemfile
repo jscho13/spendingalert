@@ -7,7 +7,7 @@ gem 'rails', '~> 5.2.0'
 gem 'mysql2'
 gem 'devise'
 gem 'twilio-ruby'
-gem 'atrium-ruby'
+gem 'atrium-ruby', path: "./lib/assets/atrium-ruby-2.1.0"
 gem 'stripe'
 gem 'phonelib'
 
