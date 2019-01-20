@@ -76,13 +76,16 @@ class User < ApplicationRecord
 
   def get_all_transactions
     params = {
+      user_guid: self.guid,
       from_date: Date.new(Date.today.year, Date.today.month, 1), # String | Filter transactions from this date.
       to_date: Date.today # String | Filter transactions to this date.
     }
 
-    transactions = ::Atrium::Transaction.list_each(:user_guid => self.guid, :query_params => params) do |transaction|
+    transactions = ::Atrium::Transaction.list(params).each do |transaction|
       transaction.category != "Transfer" && transaction.category != "Credit Card Payment"
     end
+
+    binding.pry
 
     transactions 
   end
