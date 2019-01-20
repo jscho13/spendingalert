@@ -125,7 +125,7 @@ module Atrium
 
     def initialize
       @scheme = 'https'
-      @host = 'vestibule.mx.com'
+      @host = Rails.env.production? ? 'atrium.mx.com' : 'vestibule.mx.com'
       @base_path = ''
       @api_key = {}
       @api_key_prefix = {}
