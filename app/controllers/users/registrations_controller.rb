@@ -19,6 +19,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
     resource.create_mx_guid
     resource.create_stripe_id
+    UserMailer.signed_up_email(resource).deliver
   end
 
   # GET /resource/edit
