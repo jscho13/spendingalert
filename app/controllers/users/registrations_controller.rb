@@ -20,6 +20,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
     resource.create_mx_guid
     resource.create_stripe_id
     UserMailer.signed_up_email(resource).deliver
+    flash.notice = "Thanks for signing up. We've sent you a confirmation email to make sure you're human!"
+    redirect_to root_path
   end
 
   # GET /resource/edit
