@@ -4,7 +4,7 @@ class UserMailer < ApplicationMailer
 
   def signed_up_email(user)
     @user = user
-    mail(to: 'info@spendingalert.com,jimbutler27@hotmail.com,jscho13@gmail.com',
+    mail(to: ['info@spendingalert.com','jimbutler27@hotmail.com','jscho13@gmail.com'],
     subject: 'New User Notification')
   end
 end
