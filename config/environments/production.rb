@@ -60,6 +60,10 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
   config.action_mailer.default_url_options = { host: 'spendingalert.com' }
   config.action_mailer.perform_caching = false
+
+  # we use ActionMailer to construct the email and send it from rails.
+  # Sendgrid takes those emails and sends it over the internet. Because
+  # they are a trusted mail API provider they won't end up in spam. 
   ActionMailer::Base.smtp_settings = {
     :user_name => ENV['SENDGRID_USERNAME'],
     :password => ENV['SENDGRID_PASSWORD'],
