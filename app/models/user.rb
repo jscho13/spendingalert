@@ -69,10 +69,6 @@ class User < ApplicationRecord
     end
   end
 
-  def reset_alert_sent_flag
-    self.alert_sent_flag = false
-    self.save
-  end
 
   def notification_date?
     case self.notification_interval
@@ -123,18 +119,21 @@ class User < ApplicationRecord
         puts member.to_s
       end
 
-      # update total_spending
       transactions = self.get_all_transactions
       self.total_spending = transactions.sum(&:amount)
-
-      # update alert_sent_flag
-      budget_limit_bool = self.total_spending > self['user_budget']
-      reset_alert_sent_flag if Date.today.mday == 1
-      self.alert_sent_flag = true if budget_limit_bool
-
       self.save
     rescue
       puts "Error for User: #{self.id}, #{self.email}, when trying `update_total_spending`"
+    end
+  end
+
+  def update_alert_sent_flag
+    begin
+      self.alert_sent_flag = true if self.total_spending > self.user_budget
+      self.alert_sent_flag = false if Date.today.mday == 1
+      self.save
+    rescue
+      puts "Error for User: #{self.id}, #{self.email}, when trying `update_alert_sent_flag`"
     end
   end
 

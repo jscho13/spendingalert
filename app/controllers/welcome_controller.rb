@@ -34,9 +34,10 @@ class WelcomeController < ApplicationController
     all_users.each do |u|
       members = u.get_all_memberships
       u.update_total_spending(members)
-      if u.notification_date? && (u.alert_sent_flag == false)
+      if u.notification_date? || (u.alert_sent_flag == false)
         unnotified_users << u
       end
+      u.update_alert_sent_flag
     end
     puts "Unnotified users: #{unnotified_users}\n"
 
