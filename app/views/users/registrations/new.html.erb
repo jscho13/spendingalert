@@ -3,15 +3,6 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-
-    <!-- jim captcha code -->
-     <%= onsubmit="return checkform(this) %>
-    <!-- END jim code -->
-
-
-
-
-
   <div class="field">
     <%= f.label :email %>
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
@@ -38,7 +29,7 @@
   <div class="actions">
     
     
-    
+  
     
     
     <!-- START CAPTCHA Jim Code -->
