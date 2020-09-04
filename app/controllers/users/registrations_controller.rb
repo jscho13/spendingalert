@@ -2,6 +2,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   include Devise::Controllers::Helpers
+  include HTTParty
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -22,11 +23,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     # if valid, do all this stuff below
     if response[:success]
-      resource.create_mx_guid
-      resource.create_stripe_id
-      UserMailer.signed_up_email(resource).deliver
+      puts "hello"
+#       resource.create_mx_guid
+#       resource.create_stripe_id
+#       UserMailer.signed_up_email(resource).deliver
       flash.notice = "Thanks for signing up. We've sent you a confirmation email to make sure you're human!"
     else
+      puts "goodbye"
       flash.notice = "We're sorry, there was an error signing you up! Call us directly and we'll get it fixed for you."
     end
   end
