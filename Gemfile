@@ -10,6 +10,7 @@ gem 'twilio-ruby'
 gem 'atrium-ruby', path: "./lib/assets/atrium-ruby-2.1.0"
 gem 'stripe'
 gem 'phonelib'
+gem 'httparty'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
