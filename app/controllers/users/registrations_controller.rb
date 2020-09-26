@@ -18,18 +18,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def create
     super
-    # verify response here
     response = HTTParty.post("https://www.google.com/recaptcha/api/siteverify", :body => {secret: ENV['G_RECAPTCHA_SECRET'], response: params['g-recaptcha-response']})
 
-    # if valid, do all this stuff below
-    if response[:success]
-      puts "hello"
-#       resource.create_mx_guid
-#       resource.create_stripe_id
-#       UserMailer.signed_up_email(resource).deliver
+    if response["success"]
+      puts "success"
+      resource.create_mx_guid
+      resource.create_stripe_id
+      UserMailer.signed_up_email(resource).deliver
       flash.notice = "Thanks for signing up. We've sent you a confirmation email to make sure you're human!"
     else
-      puts "goodbye"
+      puts "failure"
       flash.notice = "We're sorry, there was an error signing you up! Call us directly and we'll get it fixed for you."
     end
   end
