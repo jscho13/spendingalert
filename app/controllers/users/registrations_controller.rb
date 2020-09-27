@@ -17,24 +17,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def create
-    super
-    response = HTTParty.post("https://www.google.com/recaptcha/api/siteverify", :body => {secret: ENV['G_RECAPTCHA_SECRET'], response: params['g-recaptcha-response']})
+    super do |resource|
+      response = HTTParty.post("https://www.google.com/recaptcha/api/siteverify", :body => {secret: ENV['G_RECAPTCHA_SECRET'], response: params['g-recaptcha-response']})
 
-    if response["success"]
-# These resource create_mx_guid, calls dont work. It's not getting the right user model?
-#       puts "resource #{resource}"
-#       u = User.find(resource.id) 
-#       puts "user #{u}"
-# 
-#       puts "creating mx guid"
-#       u.create_mx_guid
-#       puts "creating stripe id"
-#       u.create_stripe_id
-
-      UserMailer.signed_up_email(resource).deliver
-      flash.notice = "Thanks for signing up. We've sent you a confirmation email to make sure you're human!"
-    else
-      flash.notice = "We're sorry, there was an error signing you up! Call us directly and we'll get it fixed for you."
+      if response["success"]
+        # These resource create_mx_guid, calls dont work. It's not getting the right user model?
+        # puts "resource #{resource}"
+        # u = User.find(resource.id) 
+        # puts "user #{u}"
+        # 
+        # puts "creating mx guid"
+        # u.create_mx_guid
+        # puts "creating stripe id"
+        # u.create_stripe_id
+        UserMailer.signed_up_email(resource).deliver
+        flash.notice = "Thanks for signing up. We've sent you a confirmation email to make sure you're human!"
+      else
+        flash.notice = "We're sorry, there was an error signing you up! Call us directly and we'll get it fixed for you."
+      end
     end
   end
 
