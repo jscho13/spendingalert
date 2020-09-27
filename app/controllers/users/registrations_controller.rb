@@ -24,13 +24,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     if response["success"]
       puts "resource #{resource}"
-      @user = User.find(resource.id) 
-      puts "user #{@user}"
+      u = User.find(resource.id) 
+      puts "user #{u}"
 
       puts "creating mx guid"
-      @user.create_mx_guid
+      u.create_mx_guid
       puts "creating stripe id"
-      @user.create_stripe_id
+      u.create_stripe_id
 
       UserMailer.signed_up_email(resource).deliver
       flash.notice = "Thanks for signing up. We've sent you a confirmation email to make sure you're human!"
