@@ -20,10 +20,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
 
     response = HTTParty.post("https://www.google.com/recaptcha/api/siteverify", :body => {secret: ENV['G_RECAPTCHA_SECRET'], response: params['g-recaptcha-response']})
+    puts response
 
     if response["success"]
-      @user = User.find(resource.id) 
       puts "resource #{resource}"
+      @user = User.find(resource.id) 
       puts "user #{@user}"
 
       puts "creating mx guid"
