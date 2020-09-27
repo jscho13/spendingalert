@@ -17,6 +17,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def create
+    super
+
+    puts "calling query"
     response = HTTParty.post("https://www.google.com/recaptcha/api/siteverify", :body => {secret: ENV['G_RECAPTCHA_SECRET'], response: params['g-recaptcha-response']})
     puts response
 
@@ -32,8 +35,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       puts "failure"
       flash.notice = "We're sorry, there was an error signing you up! Call us directly and we'll get it fixed for you."
     end
-
-    super
   end
 
   # GET /resource/edit
