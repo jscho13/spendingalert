@@ -17,22 +17,24 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def create
-    super do |resource|
-      response = HTTParty.post("https://www.google.com/recaptcha/api/siteverify", :body => {secret: ENV['G_RECAPTCHA_SECRET'], response: params['g-recaptcha-response']})
-      puts response
+    super
 
-      if response["success"]
-        puts "creating mx guid"
-        resource.create_mx_guid
-        puts "creating stripe id"
-        resource.create_stripe_id
+    response = HTTParty.post("https://www.google.com/recaptcha/api/siteverify", :body => {secret: ENV['G_RECAPTCHA_SECRET'], response: params['g-recaptcha-response']})
 
-        UserMailer.signed_up_email(resource).deliver
-        flash.notice = "Thanks for signing up. We've sent you a confirmation email to make sure you're human!"
-      else
-        puts "failure"
-        flash.notice = "We're sorry, there was an error signing you up! Call us directly and we'll get it fixed for you."
-      end
+    if response["success"]
+      @user = User.find(resource.id) 
+      puts "resource #{resource}"
+      puts "user #{@user}"
+
+      puts "creating mx guid"
+      @user.create_mx_guid
+      puts "creating stripe id"
+      @user.create_stripe_id
+
+      UserMailer.signed_up_email(resource).deliver
+      flash.notice = "Thanks for signing up. We've sent you a confirmation email to make sure you're human!"
+    else
+      flash.notice = "We're sorry, there was an error signing you up! Call us directly and we'll get it fixed for you."
     end
   end
 
