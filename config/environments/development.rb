@@ -5,16 +5,7 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    address: "spendingalert.com.herokudns.com",
-    port: "465",
-    domain: ENV["EMAIL_DOMAIN"],
-    authentication: :plain,
-    enable_starttls_auto: true,
-    user_name: ENV["EMAIL_USERNAME"],
-    password: ENV["EMAIL_PASSWORD"],
-    tls: true
-  }
+  config.action_mailer.smtp_settings = {:address => "localhost", :port => 3000}
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
@@ -68,4 +59,14 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  ActionMailer::Base.smtp_settings = {
+    :user_name => ENV['SENDGRID_USERNAME'],
+    :password => ENV['SENDGRID_PASSWORD'],
+    :domain => 'localhost:3000',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
 end

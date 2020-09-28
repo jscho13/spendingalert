@@ -31,16 +31,40 @@ Rails.application.configure do
   # Store uploaded files on the local file system in a temporary directory
   config.active_storage.service = :test
 
-  config.action_mailer.perform_caching = false
-
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
-  config.action_mailer.delivery_method = :test
+  config.action_mailer.default_url_options = { host: 'spendingalert-staging.herokuapp.com' }
+  config.action_mailer.perform_caching = false
+#   config.action_mailer.delivery_method = :test
+#   config.action_mailer.smtp_settings = {:address => "localhost", :port => 3000}
+#   config.action_mailer.smtp_settings = {
+#     address: "spendingalert.com.herokudns.com",
+#     port: "465",
+#     domain: "localhost:3000",
+#     authentication: :plain,
+#     enable_starttls_auto: true,
+#     user_name: "test",
+#     password: "test",
+#     tls: true
+#   }
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # we use ActionMailer to construct the email and send it from rails.
+  # Sendgrid takes those emails and sends it over the internet. Because
+  # they are a trusted mail API provider they won't end up in spam. 
+  ActionMailer::Base.smtp_settings = {
+    :user_name => ENV['SENDGRID_USERNAME'],
+    :password => ENV['SENDGRID_PASSWORD'],
+    :domain => 'spendingalert-staging.herokuapp.com',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
 end
