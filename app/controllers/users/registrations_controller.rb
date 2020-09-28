@@ -17,7 +17,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def create
-    puts "get response"
     response = HTTParty.post("https://www.google.com/recaptcha/api/siteverify", :body => {secret: ENV['G_RECAPTCHA_SECRET'], response: params['g-recaptcha-response']})
     puts response
 
