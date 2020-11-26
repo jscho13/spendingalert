@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-
   def update
     @user = current_user
     if @user.update_attributes(user_params)
@@ -17,6 +16,10 @@ class UsersController < ApplicationController
 
   def index
     redirect_to root_path
+  end
+
+  def delete
+    puts "GOODBYEEEEEEEEEEEE"
   end
 
 	private
