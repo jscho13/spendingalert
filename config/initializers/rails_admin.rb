@@ -1,7 +1,4 @@
 RailsAdmin.config do |config|
-
-  ### Popular gems integration
-
   ## == Devise ==
   config.authenticate_with do
     warden.authenticate! scope: :user
@@ -12,30 +9,26 @@ RailsAdmin.config do |config|
   #     redirect_to main_app.root_path unless current_user.admin?
   #   end
 
-  ## == CancanCan ==
-  # config.authorize_with :cancancan
-
-  ## == Pundit ==
-  # config.authorize_with :pundit
-
-  ## == PaperTrail ==
-  # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
-
-  ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
-
-  ## == Gravatar integration ==
-  ## To disable Gravatar integration in Navigation Bar set to false
-  # config.show_gravatar = true
-
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
-    bulk_delete
     edit
     delete
+    bulk_delete
+  end
 
-    ## With an audit adapter, you can add:
-    # history_index
-    # history_show
+  config.model User do
+    list do
+      field :email
+      field :phone_number do
+        column_width 100
+      end
+      field :guid
+      field :user_budget do
+        column_width 80
+      end
+      field :confirmed_at
+      field :admin
+    end
   end
 end
