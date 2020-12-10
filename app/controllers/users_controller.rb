@@ -18,10 +18,6 @@ class UsersController < ApplicationController
     redirect_to root_path
   end
 
-  def delete
-    puts "GOODBYEEEEEEEEEEEE"
-  end
-
 	private
 
   def user_params

@@ -25,8 +25,21 @@ class User < ApplicationRecord
         user = GlobalAtrium.users.create_user(body).user
         self.update_attribute(:guid, user.guid)
       rescue Atrium::ApiError => e
-        puts "Exception when calling UsersApi->create_user: #{e}"
+        logger.error "Exception when calling UsersApi->create_user: #{e}"
+        logger.error "User guid: #{self.guid}"
       end
+    end
+  end
+
+  def delete_mx_guid
+    begin
+      #Delete user
+      GlobalAtrium.users.delete_user(self.guid)
+      return true
+    rescue Atrium::ApiError => e
+      logger.error "Exception when calling UsersApi->delete_user: #{e}"
+      logger.error "User guid: #{self.guid}"
+      return false
     end
   end
 
@@ -51,7 +64,7 @@ class User < ApplicationRecord
         })
         self.update_attribute(:stripe_customer_id, customer.id)
       rescue
-        logger.debug "Unable to create stripe_customer_id for User ID: #{self.id}"
+        logger.error "Unable to create stripe_customer_id for User ID: #{self.id}"
       end
     end
   end
