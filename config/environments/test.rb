@@ -58,8 +58,8 @@ Rails.application.configure do
   # Sendgrid takes those emails and sends it over the internet. Because
   # they are a trusted mail API provider they won't end up in spam. 
   ActionMailer::Base.smtp_settings = {
-    :user_name => ENV['SENDGRID_USERNAME'],
-    :password => ENV['SENDGRID_PASSWORD'],
+    :user_name => 'apikey',
+    :password => ENV['SENDGRID_API_KEY'],
     :domain => 'spendingalert-staging.herokuapp.com',
     :address => 'smtp.sendgrid.net',
     :port => 587,
