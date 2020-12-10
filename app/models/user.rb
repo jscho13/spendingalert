@@ -35,6 +35,7 @@ class User < ApplicationRecord
     begin
       #Delete user
       GlobalAtrium.users.delete_user(self.guid)
+      return true
     rescue Atrium::ApiError => e
       logger.error "Exception when calling UsersApi->delete_user: #{e}"
       logger.error "User guid: #{self.guid}"
