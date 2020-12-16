@@ -42,8 +42,12 @@ class SubscriptionsController < ApplicationController
   end
 
   def delete_mx_member
-    member = get_mx_member(params[:member_guid])
-    member.delete
+    begin
+      #Delete member
+      GlobalAtrium.members.delete_member(params[:member_guid], current_user.guid)
+    rescue Atrium::ApiError => e
+      puts "Exception when calling MembersApi->delete_member: #{e}"
+    end
     redirect_to dashboard_path
   end
 
