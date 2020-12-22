@@ -91,9 +91,7 @@ class User < ApplicationRecord
       return check_interval_weekly
     when "interval_off"
       return false
-# This won't work. We need to convert percent into a dollar amount
-#       when "interval_percent"
-#         return check_interval_value("notification_percent")
+    # set to interval_daily when testing with /send_message/:id
     when "interval_daily"
       return true
     else 
