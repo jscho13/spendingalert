@@ -9,23 +9,27 @@ class TwilioTextMessenger
     puts "Message composed as: #{message}"
 
     if !Rails.env.production?
-			account_sid = ENV['TWILIO_DEVELOPMENT_ACCOUNT_SID']
-			auth_token = ENV['TWILIO_DEVELOPMENT_AUTH_TOKEN']
+      account_sid = ENV['TWILIO_DEVELOPMENT_ACCOUNT_SID']
+      auth_token = ENV['TWILIO_DEVELOPMENT_AUTH_TOKEN']
       client = Twilio::REST::Client.new account_sid, auth_token
-      client.messages.create({
+      response = client.messages.create({
         from: ENV['TWILIO_DEVELOPMENT_PHONE_NUMBER'],
         to: "#{phone_number}",
         body: message
       })
+
+      puts response
     else
-			account_sid = ENV['TWILIO_PRODUCTION_ACCOUNT_SID']
-			auth_token = ENV['TWILIO_PRODUCTION_AUTH_TOKEN']
+      account_sid = ENV['TWILIO_PRODUCTION_ACCOUNT_SID']
+      auth_token = ENV['TWILIO_PRODUCTION_AUTH_TOKEN']
       client = Twilio::REST::Client.new account_sid, auth_token
-      client.messages.create({
+      response = client.messages.create({
         from: ENV['TWILIO_PHONE_NUMBER'],
         to: "#{phone_number}",
         body: message
       })
+
+      puts response
     end
   end
 end
