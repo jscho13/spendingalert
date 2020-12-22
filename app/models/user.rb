@@ -89,6 +89,8 @@ class User < ApplicationRecord
       return check_interval_5_days
     when "interval_weekly"
       return check_interval_weekly
+    when "interval_off"
+      return false
 # This won't work. We need to convert percent into a dollar amount
 #       when "interval_percent"
 #         return check_interval_value("notification_percent")
