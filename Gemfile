@@ -13,7 +13,7 @@ gem 'phonelib'
 gem 'httparty'
 
 # Use Puma as the app server
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 5.5'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'turbolinks', '~> 5'
